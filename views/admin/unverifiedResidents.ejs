@@ -1,11 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Unverified Residents page
-</body>
-</html>
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/admin/navbar.ejs") %>
+<%-include("../partials/admin/sidebar.ejs") %>
+
+
+            <main id="main" class="main">
+
+                <div class="pagetitle">
+                    <h1>General Tables</h1>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item">Tables</li>
+                            <li class="breadcrumb-item active">General</li>
+                        </ol>
+                    </nav>
+                </div><!-- End Page Title -->
+
+                <section class="section">
+                    <div class="row-lg-6">
+                        <div class="col-lg-12">
+
+
+
+
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Table with hoverable rows</h5>
+
+                                    <!-- Table with hoverable rows -->
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">CNIC</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(let i=0;i<residents.length;i++){ %>
+                                                <tr>
+                                                    <th scope="row"><%=i+1 %></th>
+                                                    <td><%= residents[i].name %></td>
+                                                    <td><%= residents[i].cnic %></td>
+                                                    <td><%= residents[i].address %></td>
+                                                    <td>2016-05-25</td>
+                                                </tr>
+                                                <% } %>
+
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with hoverable rows -->
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    </div>
+                    </div>
+                </section>
+
+            </main>
+
+
+
+
+
+
+<%-include("../partials/footer.ejs") %>
