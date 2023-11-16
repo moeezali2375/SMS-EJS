@@ -21,7 +21,7 @@ adminRouter.get("/home", adminAuth, home);
 adminRouter.get("/residents/verified", adminAuth, get_verified_residents);
 adminRouter.get("/residents/unverified", adminAuth, get_unverified_residents);
 
-adminRouter.put("/residents/verify", adminAuth, verify_resident);
+adminRouter.post("/residents/verify", adminAuth, verify_resident);
 
 adminRouter.get("/unsold-houses", adminAuth, get_unsold_houses);
 

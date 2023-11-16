@@ -43,6 +43,7 @@ module.exports.get_unverified_residents = async (req, res) => {
 };
 
 module.exports.verify_resident = async (req, res) => {
+	console.log(req.body);
 	try {
 		const userId = req.body.userId;
 		const resident = await Resident.findOne({ userId: userId });
