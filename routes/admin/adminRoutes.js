@@ -17,7 +17,7 @@ const adminRouter = express.Router();
 
 adminRouter.get("/home", adminAuth, home);
 
-adminRouter.get("/residents", adminAuth, get_all_residents);
+adminRouter.get("admin/residents", adminAuth, get_all_residents);
 
 adminRouter.put("/residents/verify", adminAuth, verify_resident);
 

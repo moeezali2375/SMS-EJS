@@ -20,7 +20,7 @@ module.exports.login_failure = (req, res) => {
 };
 
 module.exports.login_page = async (req, res) => {
-	res.render("auth/login");
+	res.render("auth/login", { notification: "" });
 };
 
 module.exports.register_page = async (req, res) => {
@@ -33,6 +33,7 @@ module.exports.login = passport.authenticate("local", {
 });
 
 module.exports.register = async (req, res) => {
+	console.log(req.body);
 	const session = await mongoose.startSession();
 	try {
 		session.startTransaction();
@@ -60,11 +61,10 @@ module.exports.register = async (req, res) => {
 
 		await session.commitTransaction();
 		session.endSession();
-		res.render("auth/login");
+		res.render("auth/login", { notification: "" });
 	} catch (error) {
 		await session.abortTransaction();
 		session.endSession();
-		console.log("error in registeration");
 		res.render("error/400");
 	}
 };

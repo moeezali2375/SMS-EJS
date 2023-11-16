@@ -12,6 +12,10 @@ module.exports.home = (req, res) => {
 	res.render("admin/home");
 };
 
+module.exports.verify_resident_page = (req, res) => {
+	res.render("admin/verifyResident");
+};
+
 module.exports.get_all_residents = async (req, res) => {
 	try {
 		const query = {};
