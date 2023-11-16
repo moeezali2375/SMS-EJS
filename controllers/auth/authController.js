@@ -5,20 +5,26 @@ const Admin = require("../../models/admin");
 const passport = require("passport");
 const { genPassword } = require("../../utils/passwordUtils");
 
+module.exports.login_success = async (req, res) => {
+	if (req.isAuthenticated()) {
+		if (req.user.user.isAdmin) {
+			res.redirect("/admin/home");
+		} else {
+			res.redirect("/resident/home");
+		}
+	} else res.render("error/400");
+};
+
+module.exports.login_failure = (req, res) => {
+	res.render("error/400");
+};
+
 module.exports.login_page = async (req, res) => {
-	try {
-		res.render("auth/login");
-	} catch (error) {
-		res.render("error/400");
-	}
+	res.render("auth/login");
 };
 
 module.exports.register_page = async (req, res) => {
-	try {
-		res.render("auth/register");
-	} catch (error) {
-		res.render("error/400");
-	}
+	res.render("auth/register");
 };
 
 module.exports.register = async (req, res) => {
@@ -62,21 +68,6 @@ module.exports.login = passport.authenticate("local", {
 	failureRedirect: "login-failure",
 	successRedirect: "login-success",
 });
-
-module.exports.login_failure = (req, res) => {
-	// res.status(403).send("Username or Password Incorrect");
-	res.render("error/400");
-};
-
-module.exports.login_success = async (req, res) => {
-	if (req.isAuthenticated()) {
-		if (req.user.user.isAdmin) {
-			res.redirect("/admin/home");
-		} else {
-			res.redirect("/resident/home");
-		}
-	} else res.render("error/400");
-};
 
 module.exports.logout = (req, res) => {
 	if (req.isAuthenticated()) {
