@@ -7,35 +7,19 @@ const {
 	login_success,
 	register_admin,
 	login_page,
+	register_page,
 } = require("../../controllers/auth/authController");
 
 const authRouter = express.Router();
 
-authRouter.get("/login", login_page);
-
-authRouter.post("/register", register);
-authRouter.get("/register", (req, res) => {
-	var array = [];
-	array.push(
-		{
-			username: "moeez",
-			phone: "123",
-		},
-		{
-			username: "bilal",
-			phone: "456",
-		},
-		{
-			username: "affan",
-			phone: "789",
-		}
-	);
-	res.render("auth/login", { array: array });
-});
-authRouter.post("/login", login);
-
 authRouter.get("/login-failure", login_failure);
 authRouter.get("/login-success", login_success);
+
+authRouter.get("/login", login_page);
+authRouter.get("/register", register_page);
+
+authRouter.post("/login", login);
+authRouter.post("/register", register);
 
 authRouter.post("/logout", logout);
 
