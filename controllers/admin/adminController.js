@@ -9,7 +9,7 @@ const { erate, grate, wrate, daylimit } = require("../../config/index");
 const { due_date, calculate_bill } = require("../../utils/billUtils");
 
 module.exports.home = (req, res) => {
-	res.send("Home page of Admin!");
+	res.render("admin/home");
 };
 
 module.exports.get_all_residents = async (req, res) => {

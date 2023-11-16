@@ -6,7 +6,7 @@ const upload = require("../../middlewares/multer");
 const { default: mongoose } = require("mongoose");
 
 module.exports.home = (req, res) => {
-	res.send("Home page of Resident!");
+	res.render("resident/home");
 };
 
 module.exports.get_bills = async (req, res) => {
