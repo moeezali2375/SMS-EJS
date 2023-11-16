@@ -27,6 +27,11 @@ module.exports.register_page = async (req, res) => {
 	res.render("auth/register");
 };
 
+module.exports.login = passport.authenticate("local", {
+	failureRedirect: "login-failure",
+	successRedirect: "login-success",
+});
+
 module.exports.register = async (req, res) => {
 	const session = await mongoose.startSession();
 	try {
@@ -60,14 +65,9 @@ module.exports.register = async (req, res) => {
 		await session.abortTransaction();
 		session.endSession();
 		console.log("error in registeration");
-		res.status(409).send(error.message);
+		res.render("error/400");
 	}
 };
-
-module.exports.login = passport.authenticate("local", {
-	failureRedirect: "login-failure",
-	successRedirect: "login-success",
-});
 
 module.exports.logout = (req, res) => {
 	if (req.isAuthenticated()) {
