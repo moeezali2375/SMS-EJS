@@ -56,10 +56,10 @@ module.exports.verify_resident = async (req, res) => {
 					isVerified: true,
 				}
 			);
-			res.status(200).send("Resident verified!");
+			res.redirect("/admin/residents/unverified");
 		}
 	} catch (error) {
-		res.status(400).send(error.message);
+		res.render("error/400");
 	}
 };
 
