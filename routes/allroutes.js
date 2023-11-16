@@ -9,6 +9,9 @@ router.get("/", (req, res) => {
 	res.send("<h1>Hello</h1>");
 });
 
+router.get("/test", (req, res) => {
+	res.render("test/test");
+});
 router.use("/auth", authRouter);
 
 router.use("/admin", adminRouter);
