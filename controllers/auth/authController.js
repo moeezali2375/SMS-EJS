@@ -9,47 +9,53 @@ module.exports.login_page = async (req, res) => {
 	try {
 		res.render("auth/login");
 	} catch (error) {
-		console.log(error);
+		res.render("error/400");
+	}
+};
+
+module.exports.register_page = async (req, res) => {
+	try {
+		res.render("auth/register");
+	} catch (error) {
+		res.render("error/400");
 	}
 };
 
 module.exports.register = async (req, res) => {
-	console.log(req.body);
-	// const session = await mongoose.startSession();
-	// try {
-	// 	session.startTransaction();
-	// 	const { username, password, name, address, cnic } = req.body;
-	// 	const salt_hash = genPassword(password);
-	// 	const new_user = await User.insertMany(
-	// 		{
-	// 			username: username,
-	// 			salt: salt_hash.salt,
-	// 			hash: salt_hash.hash,
-	// 		},
-	// 		{
-	// 			session: session,
-	// 		}
-	// 	);
-	// 	await Resident.insertMany(
-	// 		{
-	// 			userId: new_user[0]._id,
-	// 			name: name,
-	// 			address: address,
-	// 			cnic: cnic,
-	// 		},
-	// 		{ session: session }
-	// 	);
+	const session = await mongoose.startSession();
+	try {
+		session.startTransaction();
+		const { username, password, name, address, cnic } = req.body;
+		const salt_hash = genPassword(password);
+		const new_user = await User.insertMany(
+			{
+				username: username,
+				salt: salt_hash.salt,
+				hash: salt_hash.hash,
+			},
+			{
+				session: session,
+			}
+		);
+		await Resident.insertMany(
+			{
+				userId: new_user[0]._id,
+				name: name,
+				address: address,
+				cnic: cnic,
+			},
+			{ session: session }
+		);
 
-	// 	await session.commitTransaction();
-	// 	session.endSession();
-
-	// 	res.status(201).send("Resident Registered Successfully!");
-	// } catch (error) {
-	// 	await session.abortTransaction();
-	// 	session.endSession();
-
-	// 	res.status(409).send(error.message);
-	// }
+		await session.commitTransaction();
+		session.endSession();
+		res.render("auth/login");
+	} catch (error) {
+		await session.abortTransaction();
+		session.endSession();
+		console.log("error in registeration");
+		res.status(409).send(error.message);
+	}
 };
 
 module.exports.login = passport.authenticate("local", {
@@ -58,7 +64,8 @@ module.exports.login = passport.authenticate("local", {
 });
 
 module.exports.login_failure = (req, res) => {
-	res.status(403).send("Username or Password Incorrect");
+	// res.status(403).send("Username or Password Incorrect");
+	res.render("error/400");
 };
 
 module.exports.login_success = async (req, res) => {
@@ -68,7 +75,7 @@ module.exports.login_success = async (req, res) => {
 		} else {
 			res.redirect("/resident/home");
 		}
-	} else res.status(403).send("Login again!");
+	} else res.render("error/400");
 };
 
 module.exports.logout = (req, res) => {
