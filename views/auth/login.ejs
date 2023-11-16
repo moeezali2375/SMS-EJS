@@ -1,0 +1,11 @@
+<%-include("../partials/header.ejs") %>
+<!-- array -->
+<!-- array.username -->
+
+<h1>NAMES:</h1>
+<% for (let i =0;i<array.length;i++){ %>
+<p> name: <%=array[i].username  %> </p>
+<p> phone: <%=array[i].phone  %> </p>
+<% } %>
+
+<%-include("../partials/footer.ejs") %>
