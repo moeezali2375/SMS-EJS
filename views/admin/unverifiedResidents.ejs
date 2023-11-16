@@ -29,6 +29,7 @@
                                     <h5 class="card-title">Table with hoverable rows</h5>
 
                                     <!-- Table with hoverable rows -->
+                                    <form action="residents/verify"  method="post">
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -46,14 +47,14 @@
                                                     <td><%= residents[i].name %></td>
                                                     <td><%= residents[i].cnic %></td>
                                                     <td><%= residents[i].address %></td>
-                                                    <td>2016-05-25</td>
+                                                    <td> <button  class="btn btn-primary btn-sm" name="userId" type="submit" value="<%=residents[i].userId %>">Verify</button></td>
                                                 </tr>
                                                 <% } %>
 
                                         </tbody>
                                     </table>
                                     <!-- End Table with hoverable rows -->
-
+                                </form>
                                 </div>
                             </div>
 
