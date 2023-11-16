@@ -16,18 +16,29 @@ module.exports.verify_resident_page = (req, res) => {
 	res.render("admin/verifyResident");
 };
 
-module.exports.get_all_residents = async (req, res) => {
+module.exports.get_verified_residents = async (req, res) => {
 	try {
 		const query = {};
 
-		if (req.query.isVerified) query.isVerified = req.query.isVerified;
-		if (req.query.userId) query.userId = req.query.userId;
+		query.isVerified = 1;
 
-		const all_residents = await Resident.find(query);
-
-		res.status(200).json(all_residents);
+		const verified = await Resident.find(query);
+		res.render("admin/verifiedResidents", { residents: verified });
 	} catch (error) {
-		res.status(400).send(error.message);
+		res.render("error/400");
+	}
+};
+
+module.exports.get_unverified_residents = async (req, res) => {
+	try {
+		const query = {};
+
+		query.isVerified = 0;
+
+		const unverified = await Resident.find(query);
+		res.render("admin/unverifiedResidents", { residents: unverified });
+	} catch (error) {
+		res.render("error/400");
 	}
 };
 

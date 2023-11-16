@@ -2,7 +2,8 @@ const express = require("express");
 const { adminAuth } = require("../../middlewares/adminAuth");
 const {
 	home,
-	get_all_residents,
+	get_verified_residents,
+	get_unverified_residents,
 	verify_resident,
 	get_unsold_houses,
 	buy_house,
@@ -17,7 +18,8 @@ const adminRouter = express.Router();
 
 adminRouter.get("/home", adminAuth, home);
 
-adminRouter.get("admin/residents", adminAuth, get_all_residents);
+adminRouter.get("/residents/verified", adminAuth, get_verified_residents);
+adminRouter.get("/residents/unverified", adminAuth, get_unverified_residents);
 
 adminRouter.put("/residents/verify", adminAuth, verify_resident);
 
