@@ -26,7 +26,7 @@
 
         <div class="card">
           <div class="card-body">
-
+           
 
             <!-- Table with hoverable rows -->
             <form action="/admin/residents/verify" method="post">
@@ -40,21 +40,21 @@
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
+                
                 <tbody>
                   <% for(let i=0;i<residents.length;i++){ %>
                   <tr>
                     <th scope="row"><%=i+1 %></th>
-                    <td><%= residents[i].name %></td>
-                    <td><%= residents[i].cnic %></td>
-                    <td><%= residents[i].address %></td>
-                    <td> <button class="btn btn-primary btn-sm" name="userId" type="submit" value="<%=residents[i].userId %>">Verify</button></td>
+                    <td><%= resident[i].name %></td>
+                    <td><%= resident[i].cnic %></td>
+                    <td><%= resident[i].address %></td>
+                    <td> <button class="btn btn-primary btn-sm" name="userId" type="submit" value="<%=resident[i].userId %>">Verify</button></td>
                   </tr>
                   <% } %>
 
                 </tbody>
               </table>
-            </form>
-            <!-- End Table with hoverable rows -->
+              <!-- End Table with hoverable rows -->
 
           </div>
         </div>

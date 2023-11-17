@@ -1,14 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/admin/navbar.ejs") %>
+<%-include("../partials/admin/sidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <main id="main" class="main">
 
-<body>
-  Generate Bill Page
-</body>
+    <div class="pagetitle">
+      <h1>Generate Bills</h1>
+      
+    </div><!-- End Page Title -->
 
-</html>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card-title">
+               Moeez Ali
+              </h1>
+
+              <div class="pagetitle">
+              
+                </div>
+                <h5>
+                 cnic
+                </h5>
+                <h5>
+                address
+                </h5>
+
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Current Units:</h5>
+
+            </div>
+          </div>
+
+        
+
+  
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Bill Form</h5>
+
+              <div class="pagetitle">
+                
+                <form class="row g-3 needs-validation" novalidate>
+
+                  <div class="col-12">
+                    <label for="billType" class="form-label">Billtype</label>
+                    <div class="input-group has-validation">
+                      
+                      <input type="text" name="billType" class="form-control" id="billType" required>
+                      <div class="invalid-feedback">Please enter bill type.</div>
+                    </div>
+                  </div>
+  
+                  <div class="col-12">
+                    <label for="currentUnits" class="form-label">OldUnits</label>
+                    <input type="text" name="currentUnits" class="form-control" id="currentUnits" required>
+                    <div class="invalid-feedback">Please enter oldunits!</div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Generate</button>
+                  </div>
+                </form>
+               
+              </div><!-- End Breadcrumbs with a page title -->
+
+            </div>
+          </div>
+
+          
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+
+<%-include("../partials/footer.ejs") %>

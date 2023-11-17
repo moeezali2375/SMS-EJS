@@ -83,7 +83,10 @@ h6 {
   border-radius: 4px;
   transition: all 0.4s;
 }
-
+.rightbtn{
+  position: absolute;
+  right: 50px;
+}
 .back-to-top i {
   font-size: 24px;
   color: #fff;
@@ -234,7 +237,7 @@ h6 {
 
 .card-title {
   padding: 20px 0 15px 0;
-  font-size: 18px;
+  font-size: 32px;
   font-weight: 500;
   color: #012970;
   font-family: "Poppins", sans-serif;
