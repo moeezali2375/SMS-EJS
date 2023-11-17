@@ -6,6 +6,7 @@ const {
 	get_unverified_residents,
 	verify_resident,
 	resident_details,
+	generate_bill_page,
 	get_unsold_houses,
 	buy_house,
 	get_sold_houses,
@@ -26,6 +27,14 @@ adminRouter.post("/residents/verify", adminAuth, verify_resident);
 
 adminRouter.get("/residents/verified/:id", adminAuth, resident_details);
 
+adminRouter.get(
+	"/residents/verified/:id/bills/generate",
+	adminAuth,
+	generate_bill_page
+);
+//! Generate a bill
+adminRouter.post("/bills/generate", adminAuth, generate_bill);
+
 adminRouter.get("/unsold-houses", adminAuth, get_unsold_houses);
 
 adminRouter.put("/houses/buy", adminAuth, buy_house);
@@ -37,8 +46,7 @@ adminRouter.put("/houses/sell", adminAuth, sell_house);
 //! residents-houses
 adminRouter.get("/residents-houses", adminAuth, get_residents_houses);
 
-//! Generate a bill
-adminRouter.post("/bills/generate", adminAuth, generate_bill);
+
 
 //! residents-houses-bills
 adminRouter.get(
