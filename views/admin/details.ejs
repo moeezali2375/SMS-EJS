@@ -10,153 +10,158 @@
 
  -->
 <%-include("../partials/header.ejs") %>
-  <%-include("../partials/admin/navbar.ejs") %>
-    <%-include("../partials/admin/sidebar.ejs") %>
+<%-include("../partials/admin/navbar.ejs") %>
+<%-include("../partials/admin/sidebar.ejs") %>
 
-      <main id="main" class="main">
+<main id="main" class="main">
 
-        <div class="pagetitle">
-          <h1>Resident</h1>
-          <nav>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item">Resident</li>
-              <li class="breadcrumb-item active">Details</li>
-            </ol>
-          </nav>
-        </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Resident</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Resident</li>
+        <li class="breadcrumb-item active">Details</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-        <section class="section">
-          <div class="row">
-            <div class="col-lg-12">
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
 
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title">
-                    <%=resident.name%>
-                  </h1>
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">
+              <%=resident.name%>
+            </h1>
 
-                  <div class="pagetitle">
-                    <div class="card-body">
-                      <div class="rightbtn">
-                        <button type="button" class="btn btn-success btn-lg">Buy House</button>
-
-                      </div>
-                    </div>
-                    <h5>
-                      <%=resident.cnic%>
-                    </h5>
-                    <h5>
-                      <%=resident.address%>
-                    </h5>
-
-                  </div>
-                </div>
-
-              </div>
-
-
-
-
-              <a href="/admin/residents/verified/<%=resident._id%>/bills/generate">
-                <button type="button" class="btn btn-primary btn-lg">Generate bills</button><br><br>
-              </a>
-
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Paid Bills</h5>
-                  <!-- Filter dropdown for paid/unpaid bills -->
-                  <div class="mb-3">
-                    <label for="billFilter" class="form-label">Filter by:</label>
-                    <select id="billFilter" class="form-select">
-                      <option value="all">All Bills</option>
-                      <option value="paid">Paid Bills</option>
-                      <option value="unpaid">Unpaid Bills</option>
-                    </select>
-                  </div>
-
-                  <!-- Table with hoverable rows -->
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Billtype</th>
-                        <th scope="col">Old Units</th>
-                        <th scope="col">Current Units</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Due Date</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <% for(let i=0; i < bills.length; i++){ %>
-                        <tr class="bill-row" data-ispaid="<%= bills[i].isPayed %>">
-                          <th scope="row">
-                            <%= i + 1 %>
-                          </th>
-                          <td>
-                            <% if(bills[i].billType==0) %>
-                            Electricity
-                            <% if(bills[i].billType==1) %>
-                            Gas
-                            <% if(bills[i].billType==2) %>
-                           Water
-                          </td>
-                          <td>
-                            <%= bills[i].oldUnits %>
-                          </td>
-                          <td>
-                            <%= bills[i].currentUnits %>
-                          </td>
-                          <td>
-                            <%= bills[i].amount %>
-                          </td>
-                          <td>
-                            <%= bills[i].duedate %>
-                          </td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                  </table>
-                  <!-- End Table with hoverable rows -->
+            <div class="pagetitle">
+              <div class="card-body">
+                <div class="rightbtn">
+                  <button type="button" class="btn btn-success btn-lg">Buy House</button>
 
                 </div>
               </div>
+              <h5>
+                <%=resident.cnic%>
+              </h5>
+              <h5>
+                <%=resident.address%>
+              </h5>
+
             </div>
           </div>
-        </section>
-      </main>
-
-
-      <%console.log(bills);%>
-
-        <script>
-          document.getElementById('billFilter').addEventListener('change', function () {
-            const filterValue = this.value;
-
-            document.querySelectorAll('.bill-row').forEach(row => {
-              const isPayed = row.getAttribute('data-ispaid');
-
-              if (filterValue === 'all' || (filterValue === 'paid' && isPayed === 'true') || (filterValue === 'unpaid' && isPayed === 'false')) {
-                row.style.display = 'table-row';
-              } else {
-                row.style.display = 'none';
-              }
-            });
-          });
-        </script>
-        </div>
-        </div>
-        </div>
 
         </div>
+
+
+
+
+        <a href="/admin/residents/verified/<%=resident._id%>/bills/generate">
+          <button type="button" class="btn btn-primary btn-lg">Generate bills</button><br><br>
+        </a>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Paid Bills</h5>
+            <!-- Filter dropdown for paid/unpaid bills -->
+            <div class="mb-3">
+              <label for="billFilter" class="form-label">Filter by:</label>
+              <select id="billFilter" class="form-select">
+                <option value="all">All Bills</option>
+                <option value="paid">Paid Bills</option>
+                <option value="unpaid">Unpaid Bills</option>
+              </select>
+            </div>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Billtype</th>
+                  <th scope="col">Old Units</th>
+                  <th scope="col">Current Units</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Due Date</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% for(let i=0; i < bills.length; i++){ %>
+                <tr class="bill-row" data-ispaid="<%= bills[i].isPayed %>">
+                  <th scope="row">
+                    <%= i + 1 %>
+                  </th>
+                  <% if(bills[i].billType==0) {%>
+                  <td>
+                    Electricity
+                  </td>
+                  <%} else if(bills[i].billType==1){ %>
+                  <td>
+                    Gas
+                  </td>
+                  <% }else if(bills[i].billType==2){ %>
+                  <td>
+                    Water
+                  </td>
+                  <% } %>
+                  <% if (bills[i].billType==1) %>
+                  <td>
+                    <%= bills[i].oldUnits %>
+                  </td>
+                  <td>
+                    <%= bills[i].currentUnits %>
+                  </td>
+                  <td>
+                    <%= bills[i].amount %>
+                  </td>
+                  <td>
+                    <%= bills[i].duedate %>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+          </div>
         </div>
-
-        </div>
-        </div>
-        </section>
-
-        </main>
+      </div>
+    </div>
+  </section>
+</main>
 
 
-        <%-include("../partials/footer.ejs") %>
+
+<script>
+  document.getElementById('billFilter').addEventListener('change', function() {
+    const filterValue = this.value;
+
+    document.querySelectorAll('.bill-row').forEach(row => {
+      const isPayed = row.getAttribute('data-ispaid');
+
+      if (filterValue === 'all' || (filterValue === 'paid' && isPayed === 'true') || (filterValue === 'unpaid' && isPayed === 'false')) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+</script>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+
+<%-include("../partials/footer.ejs") %>
