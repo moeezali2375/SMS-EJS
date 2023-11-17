@@ -46,6 +46,14 @@
               <h5>
                 <%=resident.cnic%>
               </h5>
+              <% if (house){ %>
+              <h5>
+                House: <%= house.houseNo %>
+              </h5>
+              <h5>
+                Block: <%= house.block %>
+              </h5>
+              <% } %>
               <h5>
                 <%=resident.address%>
               </h5>
