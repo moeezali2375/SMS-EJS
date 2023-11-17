@@ -126,7 +126,7 @@
                     <%= bills[i].amount %>
                   </td>
                   <td>
-                    <%= bills[i].duedate %>
+                    <%= new Date(bills[i].dueDate).toLocaleDateString() %>
                   </td>
                 </tr>
                 <% } %>
@@ -140,6 +140,8 @@
     </div>
   </section>
 </main>
+
+
 
 
 
