@@ -60,7 +60,19 @@ module.exports.verify_resident = async (req, res) => {
 };
 
 module.exports.resident_details = async (req, res) => {
-	res.render("admin/details", { house: "" }, { resident: "" }, { bills: "" });
+	try {
+		const id = req.params.id;
+		const resident = await Resident.findById(id);
+		const house = await House.findOne({ residentId: id });
+		const bills = await Bill.find({ residentId: id });
+		res.render("admin/details", {
+			house: house,
+			resident: resident,
+			bills: bills,
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 module.exports.get_unsold_houses = async (req, res) => {
