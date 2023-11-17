@@ -12,10 +12,6 @@ module.exports.home = (req, res) => {
 	res.render("admin/home");
 };
 
-module.exports.verify_resident_page = (req, res) => {
-	res.render("admin/verifyResident");
-};
-
 module.exports.get_verified_residents = async (req, res) => {
 	try {
 		const query = {};
@@ -43,7 +39,6 @@ module.exports.get_unverified_residents = async (req, res) => {
 };
 
 module.exports.verify_resident = async (req, res) => {
-	console.log(req.body);
 	try {
 		const userId = req.body.userId;
 		const resident = await Resident.findOne({ userId: userId });
@@ -62,6 +57,10 @@ module.exports.verify_resident = async (req, res) => {
 	} catch (error) {
 		res.render("error/400");
 	}
+};
+
+module.exports.resident_details = async (req, res) => {
+	res.render("admin/details", { house: "" }, { resident: "" }, { bills: "" });
 };
 
 module.exports.get_unsold_houses = async (req, res) => {

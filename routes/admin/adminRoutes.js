@@ -5,6 +5,7 @@ const {
 	get_verified_residents,
 	get_unverified_residents,
 	verify_resident,
+	resident_details,
 	get_unsold_houses,
 	buy_house,
 	get_sold_houses,
@@ -22,6 +23,8 @@ adminRouter.get("/residents/verified", adminAuth, get_verified_residents);
 adminRouter.get("/residents/unverified", adminAuth, get_unverified_residents);
 
 adminRouter.post("/residents/verify", adminAuth, verify_resident);
+
+adminRouter.get("/residents/verified/:id", adminAuth, resident_details);
 
 adminRouter.get("/unsold-houses", adminAuth, get_unsold_houses);
 

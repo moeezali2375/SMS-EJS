@@ -16,11 +16,14 @@ module.exports.login_success = async (req, res) => {
 };
 
 module.exports.login_failure = (req, res) => {
-	res.render("error/400");
+	req.session.notification = "Username or Password Incorrect!";
+	res.redirect("/auth/login");
 };
 
 module.exports.login_page = async (req, res) => {
-	res.render("auth/login", { notification: "" });
+	const notification = req.session.notification;
+	req.session.notification = null;
+	res.render("auth/login", { notification: notification });
 };
 
 module.exports.register_page = async (req, res) => {
@@ -61,7 +64,7 @@ module.exports.register = async (req, res) => {
 
 		await session.commitTransaction();
 		session.endSession();
-		res.render("auth/login", { notification: "" });
+		res.redirect("/auth/login");
 	} catch (error) {
 		await session.abortTransaction();
 		session.endSession();
