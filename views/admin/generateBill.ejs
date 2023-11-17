@@ -34,7 +34,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Current Units:</h5>
+              <h5 class="card-title">Old Units:</h5>
 
             </div>
           </div>
@@ -55,16 +55,35 @@
                 <form class="row g-3 needs-validation" novalidate>
 
                   <div class="col-12">
-                    <label for="billType" class="form-label">Billtype</label>
+                    <label for="billType" class="form-label">BILLTYPE:</label>
                     <div class="input-group has-validation">
-                      
-                      <input type="text" name="billType" class="form-control" id="billType" required>
-                      <div class="invalid-feedback">Please enter bill type.</div>
-                    </div>
+                      <fieldset class="row mb-3">
+                     
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="0" >
+                            <label class="form-check-label" for="gridRadios1">
+                              Electricity
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1">
+                            <label class="form-check-label" for="gridRadios2">
+                              Gas
+                            </label>
+                          </div>
+                          <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="2" >
+                            <label class="form-check-label" for="gridRadios3">
+                             Water
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
                   </div>
   
                   <div class="col-12">
-                    <label for="currentUnits" class="form-label">OldUnits</label>
+                    <label for="currentUnits" class="form-label">CURRENTUNITS:</label>
                     <input type="text" name="currentUnits" class="form-control" id="currentUnits" required>
                     <div class="invalid-feedback">Please enter oldunits!</div>
                   </div>
