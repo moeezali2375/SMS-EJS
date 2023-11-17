@@ -23,10 +23,10 @@
               
                 </div>
                 <h5>
-                 cnic
+                  <%= resident.cnic%>
                 </h5>
                 <h5>
-                address
+                  <%= resident.address%>
                 </h5>
 
             </div>
@@ -35,6 +35,18 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Old Units:</h5>
+              <h5>
+                Electricity Units: 
+                <%= house.emeter%>
+               </h5>
+               <h5>
+                Gas Units: 
+                <%= house.gmeter%>
+               </h5>
+               <h5>
+                Water Units: 
+                <%= house.wmeter%>
+               </h5>
 
             </div>
           </div>
