@@ -76,7 +76,19 @@ module.exports.resident_details = async (req, res) => {
 };
 
 module.exports.generate_bill_page = async (req, res) => {
-	res.render("admin/generateBill",{message: ""});
+	try {
+		const id = req.params.id;
+		const resident = await Resident.findById(id);
+		const house = await House.findOne({ residentId: id });
+		console.log(resident, house);
+		res.render("admin/generateBill", {
+			message: "",
+			house: house,
+			resident: resident,
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 module.exports.generate_bill = async (req, res) => {
