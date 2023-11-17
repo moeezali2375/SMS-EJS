@@ -1,14 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- 
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
-  Resident Detail Page
-</body>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="bi bi-exclamation-octagon me-1"></i>
+  A simple danger alert with icon—check it out!
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
-</html>
+
+ -->
+ <%-include("../partials/header.ejs") %>
+ <%-include("../partials/admin/navbar.ejs") %>
+   <%-include("../partials/admin/sidebar.ejs") %>
+
+     <main id="main" class="main">
+
+       <div class="pagetitle">
+         <h1>Resident</h1>
+         <nav>
+           <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+             <li class="breadcrumb-item">Resident</li>
+             <li class="breadcrumb-item active">Details</li>
+           </ol>
+         </nav>
+       </div><!-- End Page Title -->
+
+       <section class="section">
+         <div class="row">
+           <div class="col-lg-12">
+
+             <div class="card">
+               <div class="card-body">
+                 <h5 class="card-title">Moeez Ali</h5>
+
+                 <div class="pagetitle">
+
+
+                   <div class="card-body">
+
+                     <button type="button" class="btn btn-success btn-lg">Large</button>
+                   </div>
+
+                   <h5>H-424</h5>
+                   <h5>wapda town </h5>
+                   <h5>1234567890123</h5>
+
+
+                 </div>
+               </div>
+
+             </div>
+             <a href="/admin/residents/verified/<%=resident._id%>/bills/generate">
+             <button type="button" class="btn btn-primary btn-lg">Generate bills</button><br><br>
+             </a>
+             
+         <div class="card">
+           <div class="card-body">
+             <h5 class="card-title">Paid Bills</h5>
+
+             <!-- Table with hoverable rows -->
+             <table class="table table-hover">
+               <thead>
+                 <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Name</th>
+                   <th scope="col">Position</th>
+                   <th scope="col">Age</th>
+                   <th scope="col">Start Date</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <th scope="row">1</th>
+                   <td>Brandon Jacob</td>
+                   <td>Designer</td>
+                   <td>28</td>
+                   <td>2016-05-25</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">2</th>
+                   <td>Bridie Kessler</td>
+                   <td>Developer</td>
+                   <td>35</td>
+                   <td>2014-12-05</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">3</th>
+                   <td>Ashleigh Langosh</td>
+                   <td>Finance</td>
+                   <td>45</td>
+                   <td>2011-08-12</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">4</th>
+                   <td>Angus Grady</td>
+                   <td>HR</td>
+                   <td>34</td>
+                   <td>2012-06-11</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">5</th>
+                   <td>Raheem Lehner</td>
+                   <td>Dynamic Division Officer</td>
+                   <td>47</td>
+                   <td>2011-04-19</td>
+                 </tr>
+               </tbody>
+             </table>
+             <!-- End Table with hoverable rows -->
+
+           </div>
+         </div>
+           </div>
+
+         </div>
+         </div>
+
+         </div>
+         </div>
+       </section>
+
+     </main>
+
+
+     <%-include("../partials/footer.ejs") %>
