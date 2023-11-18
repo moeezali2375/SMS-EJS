@@ -234,6 +234,12 @@ h6 {
   color: #798eb3;
   padding: 15px;
 }
+.hualert{
+  position: absolute;
+    top: 170px;
+    left: 173px;
+    right: 23px;
+}
 
 .card-title {
   padding: 20px 0 15px 0;
