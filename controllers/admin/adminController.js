@@ -140,12 +140,13 @@ module.exports.sell_house = async (req, res) => {
 
 module.exports.generate_bill_page = async (req, res) => {
 	try {
+		const message = req.session.message;
+		req.session.message = null;
 		const id = req.params.id;
 		const resident = await Resident.findById(id);
 		const house = await House.findOne({ residentId: id });
-		console.log(resident, house);
 		res.render("admin/generateBill", {
-			message: "",
+			message: message,
 			house: house,
 			resident: resident,
 		});
@@ -156,7 +157,6 @@ module.exports.generate_bill_page = async (req, res) => {
 
 module.exports.generate_bill = async (req, res) => {
 	const { residentId, billType, currentUnits } = req.body;
-	console.log(residentId, billType, currentUnits);
 	const session = await mongoose.startSession();
 	try {
 		session.startTransaction();
@@ -203,10 +203,15 @@ module.exports.generate_bill = async (req, res) => {
 		);
 		await session.commitTransaction();
 		session.endSession();
+		req.session.message = "Bill Generated!";
+		let goBack = "/admin/residents/verified/" + residentId + "/bills/generate";
+		res.redirect(goBack);
 	} catch (error) {
 		await session.abortTransaction();
 		session.endSession();
-		res.render("admin/generateBill", { message: "Validation Failed" });
+		req.session.message = "How would I generate a -ve bill?";
+		let goBack = "/admin/residents/verified/" + residentId + "/bills/generate";
+		res.redirect(goBack);
 	}
 };
 
