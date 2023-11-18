@@ -36,7 +36,6 @@ module.exports.login = passport.authenticate("local", {
 });
 
 module.exports.register = async (req, res) => {
-	console.log(req.body);
 	const session = await mongoose.startSession();
 	try {
 		session.startTransaction();
@@ -77,7 +76,7 @@ module.exports.logout = (req, res) => {
 		req.logout((error) => {
 			if (error) res.status(400).send("Error in logout!\n" + error);
 		});
-		res.status(200).send("Logged out successfully!");
+		res.redirect("/auth/login");
 	} else res.status(403).send("Login again!");
 };
 

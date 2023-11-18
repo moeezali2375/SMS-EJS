@@ -12,6 +12,12 @@ router.get("/", (req, res) => {
 router.get("/test", (req, res) => {
 	res.render("test/test");
 });
+
+// router.post("/test", (req, res) => {
+// 	console.log(req.body);
+// 	res.render("test/test");
+// });
+
 router.use("/auth", authRouter);
 
 router.use("/admin", adminRouter);

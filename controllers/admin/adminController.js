@@ -12,19 +12,6 @@ module.exports.home = (req, res) => {
 	res.render("admin/home");
 };
 
-module.exports.get_verified_residents = async (req, res) => {
-	try {
-		const query = {};
-
-		query.isVerified = 1;
-
-		const verified = await Resident.find(query);
-		res.render("admin/verifiedResidents", { residents: verified });
-	} catch (error) {
-		res.render("error/400");
-	}
-};
-
 module.exports.get_unverified_residents = async (req, res) => {
 	try {
 		const query = {};
@@ -34,7 +21,7 @@ module.exports.get_unverified_residents = async (req, res) => {
 		const unverified = await Resident.find(query);
 		res.render("admin/unverifiedResidents", { residents: unverified });
 	} catch (error) {
-		res.render("error/400");
+		console.log(error);
 	}
 };
 
@@ -55,12 +42,27 @@ module.exports.verify_resident = async (req, res) => {
 			res.redirect("/admin/residents/unverified");
 		}
 	} catch (error) {
-		res.render("error/400");
+		console.log(error);
+	}
+};
+
+module.exports.get_verified_residents = async (req, res) => {
+	try {
+		const query = {};
+
+		query.isVerified = 1;
+
+		const verified = await Resident.find(query);
+		res.render("admin/verifiedResidents", { residents: verified });
+	} catch (error) {
+		console.log(error);
 	}
 };
 
 module.exports.resident_details = async (req, res) => {
 	try {
+		const message = req.session.message;
+		req.session.message = null;
 		const id = req.params.id;
 		const resident = await Resident.findById(id);
 		const house = await House.findOne({ residentId: id });
@@ -69,7 +71,68 @@ module.exports.resident_details = async (req, res) => {
 			house: house,
 			resident: resident,
 			bills: bills,
+			message: message,
 		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.buy_house_page = async (req, res) => {
+	const available_houses = await House.find({ residentId: null });
+	const resident = await Resident.findById(req.params.id);
+
+	res.render("admin/buyHouse", {
+		resident: resident,
+		houses: available_houses,
+	});
+};
+
+module.exports.buy_house = async (req, res) => {
+	try {
+		const { residentId, houseId } = req.body;
+		const house = await House.findOne({ _id: houseId });
+		if (!house.residentId) {
+			await House.findOneAndUpdate(
+				{
+					_id: houseId,
+				},
+				{
+					residentId: residentId,
+				}
+			);
+			req.session.message = "House Bought Successfully!";
+		} else {
+			req.session.message = "Error!";
+		}
+		let goBack = "/admin/residents/verified/" + residentId;
+		res.redirect(goBack);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.sell_house = async (req, res) => {
+	try {
+		const { residentId, houseId } = req.body;
+		const house = await House.findOne({
+			_id: houseId,
+			residentId: residentId,
+		});
+		if (!house) throw new Error("No House to Sell!");
+		else {
+			await House.findOneAndUpdate(
+				{
+					_id: houseId,
+				},
+				{
+					residentId: null,
+				}
+			);
+			req.session.message = "House Sold Successfully!";
+			let goBack = "/admin/residents/verified/" + residentId;
+			res.redirect(goBack);
+		}
 	} catch (error) {
 		console.log(error);
 	}
@@ -140,8 +203,6 @@ module.exports.generate_bill = async (req, res) => {
 		);
 		await session.commitTransaction();
 		session.endSession();
-		
-		
 	} catch (error) {
 		await session.abortTransaction();
 		session.endSession();
@@ -168,28 +229,6 @@ module.exports.get_unsold_houses = async (req, res) => {
 	}
 };
 
-module.exports.buy_house = async (req, res) => {
-	try {
-		const { residentId, houseId } = req.body;
-		const house = await House.findOne({ _id: houseId });
-		if (!house.residentId) {
-			await House.findOneAndUpdate(
-				{
-					_id: houseId,
-				},
-				{
-					residentId: residentId,
-				}
-			);
-			res.status(200).send("House Bought Successfully!");
-		} else {
-			throw new Error("House already Sold!");
-		}
-	} catch (error) {
-		res.status(400).send(error.message);
-	}
-};
-
 module.exports.get_sold_houses = async (req, res) => {
 	try {
 		const query = {
@@ -199,30 +238,6 @@ module.exports.get_sold_houses = async (req, res) => {
 		const houses = await House.find(query);
 
 		res.status(200).json(houses);
-	} catch (error) {
-		res.status(400).send(error.message);
-	}
-};
-
-module.exports.sell_house = async (req, res) => {
-	try {
-		const { residentId, houseId } = req.body;
-		const house = await House.findOne({
-			_id: houseId,
-			residentId: residentId,
-		});
-		if (!house) throw new Error("No House to Sell!");
-		else {
-			await House.findOneAndUpdate(
-				{
-					_id: houseId,
-				},
-				{
-					residentId: null,
-				}
-			);
-			res.status(200).send("House Sold Successfully!");
-		}
 	} catch (error) {
 		res.status(400).send(error.message);
 	}

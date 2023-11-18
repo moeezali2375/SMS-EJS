@@ -38,125 +38,145 @@
 
             <div class="pagetitle">
               <div class="card-body">
-                <div class="rightbtn">
-                  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#basicModal">
-                    Sell House
-                  </button>
-                <div class="modal fade" id="basicModal" tabindex="-1">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Confirmation</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                       Are you sure you want to sell this house?
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Confirm</button>
-                      </div>
-                    </div>
+                <% if (message){ %>
+                <div class="hualert">
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-octagon me-1"></i>
+                    <%= message %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
-                </div><!-- End Basic Modal-->
-
+                </div>
+                <% } %>
+                <div class="rightbtn">
+                  <%if (house) { %>
+                  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    Sell his House 😭
+                  </button>
+                  <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Confirmation</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to sell this resident's house?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <form action="/admin/houses/sell" method="post">
+                            <input type="hidden" name="residentId" value="<%=resident._id%>">
+                            <input type="hidden" name="houseId" value="<%=house._id%>">
+                            <button type="submit" class="btn btn-primary">Confirm</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>  
+                  </div><!-- End Basic Modal-->
+                  <% } else {%>
+                  <a href="/admin/residents/verified/<%=resident._id%>/houses/buy">
+                    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#basicModal">
+                      Buy him a House! 🥰
+                    </button>
+                  </a>
+                  <%}%>
                 </div>
               </div>
               <h5>
                 <%=resident.cnic%>
-              </h5>
-              <% if (house){ %>
-              <h5>
-                House: <%= house.houseNo %>
-              </h5>
-              <h5>
-                Block: <%= house.block %>
-              </h5>
-              <% } %>
-              <h5>
-                <%=resident.address%>
-              </h5>
-
-            </div>
-          </div>
-
-        </div>
-
-
-
-
-        <a href="/admin/residents/verified/<%=resident._id%>/bills/generate">
-          <button type="button" class="btn btn-primary btn-lg">Generate bills</button><br><br>
-        </a>
-
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Paid Bills</h5>
-            <!-- Filter dropdown for paid/unpaid bills -->
-            <div class="mb-3">
-              <label for="billFilter" class="form-label">Filter by:</label>
-              <select id="billFilter" class="form-select">
-                <option value="all">All Bills</option>
-                <option value="paid">Paid Bills</option>
-                <option value="unpaid">Unpaid Bills</option>
-              </select>
-            </div>
-
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Billtype</th>
-                  <th scope="col">Old Units</th>
-                  <th scope="col">Current Units</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Due Date</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% for(let i=0; i < bills.length; i++){ %>
-                <tr class="bill-row" data-ispaid="<%= bills[i].isPayed %>">
-                  <th scope="row">
-                    <%= i + 1 %>
-                  </th>
-                  <% if(bills[i].billType==0) {%>
-                  <td>
-                    Electricity
-                  </td>
-                  <%} else if(bills[i].billType==1){ %>
-                  <td>
-                    Gas
-                  </td>
-                  <% }else if(bills[i].billType==2){ %>
-                  <td>
-                    Water
-                  </td>
+                  </h5>
+                  <% if (house){ %>
+                  <h5>
+                    House: <%= house.houseNo %>
+                  </h5>
+                  <h5>
+                    Block: <%= house.block %>
+                  </h5>
                   <% } %>
-                  <% if (bills[i].billType==1) %>
-                  <td>
-                    <%= bills[i].oldUnits %>
-                  </td>
-                  <td>
-                    <%= bills[i].currentUnits %>
-                  </td>
-                  <td>
-                    <%= bills[i].amount %>
-                  </td>
-                  <td>
-                    <%= new Date(bills[i].dueDate).toLocaleDateString() %>
-                  </td>
-                </tr>
-                <% } %>
-              </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
+                  <h5>
+                    <%=resident.address%>
+                  </h5>
 
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+            <a href="/admin/residents/verified/<%=resident._id%>/bills/generate">
+              <button type="button" class="btn btn-primary btn-lg">Generate bills</button><br><br>
+            </a>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Paid Bills</h5>
+                <!-- Filter dropdown for paid/unpaid bills -->
+                <div class="mb-3">
+                  <label for="billFilter" class="form-label">Filter by:</label>
+                  <select id="billFilter" class="form-select">
+                    <option value="all">All Bills</option>
+                    <option value="paid">Paid Bills</option>
+                    <option value="unpaid">Unpaid Bills</option>
+                  </select>
+                </div>
+
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Billtype</th>
+                      <th scope="col">Old Units</th>
+                      <th scope="col">Current Units</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Due Date</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% for(let i=0; i < bills.length; i++){ %>
+                    <tr class="bill-row" data-ispaid="<%= bills[i].isPayed %>">
+                      <th scope="row">
+                        <%= i + 1 %>
+                      </th>
+                      <% if(bills[i].billType==0) {%>
+                      <td>
+                        Electricity
+                      </td>
+                      <%} else if(bills[i].billType==1){ %>
+                      <td>
+                        Gas
+                      </td>
+                      <% }else if(bills[i].billType==2){ %>
+                      <td>
+                        Water
+                      </td>
+                      <% } %>
+                      <% if (bills[i].billType==1) %>
+                      <td>
+                        <%= bills[i].oldUnits %>
+                      </td>
+                      <td>
+                        <%= bills[i].currentUnits %>
+                      </td>
+                      <td>
+                        <%= bills[i].amount %>
+                      </td>
+                      <td>
+                        <%= new Date(bills[i].dueDate).toLocaleDateString() %>
+                      </td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
   </section>
 </main>
 

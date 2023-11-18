@@ -8,23 +8,19 @@
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
 
- 
+
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
 
-       
-
-        
-          
 
 
-       
-       
+
+
       <li class="nav-item dropdown pe-3">
-        <a href="/auth/login">
-        <button type="button" class="btn btn-outline-primary">   <i class="bi bi-box-arrow-right"> </i>  Logout</button>
-        </a>
-       
+        <form action="/auth/logout/" method="post">
+          <button  class="btn btn-outline-primary" name="logoutButton" type="submit">Logout</button>
+        </form>
+
 
     </ul>
   </nav><!-- End Icons Navigation -->
