@@ -92,10 +92,11 @@ module.exports.generate_bill_page = async (req, res) => {
 };
 
 module.exports.generate_bill = async (req, res) => {
+	const { residentId, billType, currentUnits } = req.body;
+	console.log(residentId, billType, currentUnits);
 	const session = await mongoose.startSession();
 	try {
 		session.startTransaction();
-		const { residentId, billType, currentUnits } = req.body;
 		const house = await House.findOne({ residentId: residentId });
 		let oldUnits = 0;
 		let amount = 0;
@@ -139,8 +140,8 @@ module.exports.generate_bill = async (req, res) => {
 		);
 		await session.commitTransaction();
 		session.endSession();
-
-		res.status(201).send("Bill Registered Successfully!");
+		
+		
 	} catch (error) {
 		await session.abortTransaction();
 		session.endSession();
