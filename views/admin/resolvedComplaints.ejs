@@ -14,60 +14,60 @@
         <li class="breadcrumb-item active">Resolved</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
 
   <section class="section">
     <div class="row-lg-6">
       <div class="col-lg-12">
-
-
-
-
-
         <div class="card">
           <div class="card-body">
-
-
-            <!-- Table with hoverable rows -->
+            <% if (message){ %>
+            <div class="hualert">
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+            <% } %>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">CNIC</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Resident</th>
+                  <th scope="col">Date</th>
                   <th scope="col">Address</th>
-                  <th scope="col">Type</th>
-                 
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-               
+                <% for (let i =0;i<complaints.length;i++){ %>
                 <tr>
-                  <th scope="row"></th>
-                  <td>bilal</td>
-                  <td>12135467869754</td>
-                  <td>424-h,lahore</td>
-                  <td>Electrical</td>
-                
+                  <th scope="row">
+                    <%= i+1 %>
+                  </th>
+                  <td><%=complaints[i].title%></td>
+                  <td><%=complaints[i].resident.name%></td>
+                  <td><%=complaints[i].date%></td>
+                  <td><%=complaints[i].resident.address%></td>
+                  <td>
+                    <a href="/admin/complaints/<%=complaints[i]._id%>">
+                      <button class="btn btn-primary btn-sm" name="complaintId" type="button">Details
+                      </button>
+                    </a>
+                  </td>
                 </tr>
-             
-
+                <% } %>
               </tbody>
             </table>
-            <!-- End Table with hoverable rows -->
-
           </div>
         </div>
-
-
-
       </div>
     </div>
-
     </div>
     </div>
   </section>
-
 </main>
 
 

@@ -1,4 +1,3 @@
-
 <%-include("../partials/header.ejs") %>
 <%-include("../partials/admin/navbar.ejs") %>
 <%-include("../partials/admin/sidebar.ejs") %>
@@ -23,66 +22,67 @@
         <div class="card">
           <div class="card-body">
             <h1 class="card-title">
-             Moeez Ali
+              <%=resident.name%>
             </h1>
 
             <div class="pagetitle">
               <div class="card-body">
+                <% if (complaint.isSolved===false){ %>
                 <div class="rightbtn">
                   <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#basicModal">
                     Resolve
                   </button>
-                <div class="modal fade" id="basicModal" tabindex="-1">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Confirmation</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                       Are you sure you want to resolve this complaint?
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Confirm</button>
+                  <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Confirmation</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure the complaint is resolved now?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <form action="/admin/complaints/<%=complaint._id%>/resolve" method="post">
+                            <button type="submit" class="btn btn-primary">Confirm</button>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div><!-- End Basic Modal-->
-
                 </div>
               </div>
+              <% }else{;} %>
               <h5>
-              123546783435
+                <%=resident.cnic  %>
               </h5>
-             
+              <% if (house){ %>
               <h5>
-                House: 1
+                House: <%=house.houseNo%>
               </h5>
               <h5>
-                Block: B
+                Block: <%=house.block%>
               </h5>
-            
+              <% } %>
               <h5>
-               e-424,lahore
+                <%=resident.address%>
               </h5>
-
+              <h5>
+                Date: <%=complaint.date%>
+              </h5>
             </div>
           </div>
-
         </div>
 
-
-
-
-      
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Description:</h5>
-            <!-- Filter dropdown for paid/unpaid bills -->
-          
-            <!-- End Table with hoverable rows -->
-
+            <h5 class="card-title">
+              <%=complaint.title%>
+            </h5>
+            <h5>
+              <%=complaint.description%>
+            </h5>
           </div>
         </div>
       </div>

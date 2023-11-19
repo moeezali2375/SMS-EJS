@@ -4,6 +4,7 @@ const User = require("../../models/user");
 const Resident = require("../../models/resident");
 const House = require("../../models/house");
 const Bill = require("../../models/bill");
+const Complaint = require("../../models/complaint");
 
 const { erate, grate, wrate, daylimit } = require("../../config/index");
 const { due_date, calculate_bill } = require("../../utils/billUtils");
@@ -215,76 +216,82 @@ module.exports.generate_bill = async (req, res) => {
 	}
 };
 
-module.exports.get_unsold_houses = async (req, res) => {
+module.exports.solved_complaints_page = async (req, res) => {
 	try {
-		const query = {
-			$or: [
-				{ residentId: null }, // Matches null values};
-			],
-		};
-
-		// if (req.query.houseNo) query.houseNo = req.query.houseNo;
-		// if (req.query.block) query.block = req.query.block;
-
-		const houses = await House.find(query);
-
-		res.status(200).json(houses);
-	} catch (error) {
-		res.status(400).send(error.message);
-	}
-};
-
-module.exports.get_sold_houses = async (req, res) => {
-	try {
-		const query = {
-			$or: [{ residentId: { $ne: null } }],
-		};
-
-		const houses = await House.find(query);
-
-		res.status(200).json(houses);
-	} catch (error) {
-		res.status(400).send(error.message);
-	}
-};
-
-module.exports.get_residents_houses = async (req, res) => {
-	try {
-		const result = await Resident.aggregate()
+		const resolved_complaints = await Complaint.aggregate([
+			{ $match: { isSolved: true } },
+		])
 			.lookup({
-				from: "houses",
-				localField: "_id",
-				foreignField: "residentId",
-				as: "house",
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "resident",
 			})
-			.unwind("house")
+			.unwind("resident")
 			.exec();
-		res.status(200).json(result);
+		res.render("admin/resolvedComplaints", {
+			complaints: resolved_complaints,
+			message: null,
+		});
 	} catch (error) {
-		res.status(400).send(error.message);
+		console.log(error);
 	}
 };
 
-module.exports.get_residents_houses_bills = async (req, res) => {
+module.exports.unresolved_complaints_page = async (req, res) => {
 	try {
-		const result = await Resident.aggregate()
+		const message = req.session.message;
+		req.session.message = null;
+		const unresolved_complaints = await Complaint.aggregate([
+			{ $match: { isSolved: false } },
+		])
 			.lookup({
-				from: "houses",
-				localField: "_id",
-				foreignField: "residentId",
-				as: "house",
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "resident",
 			})
-			.unwind("house")
-			.lookup({
-				from: "bills",
-				localField: "_id",
-				foreignField: "residentId",
-				as: "bills",
-			})
-			.unwind("bills")
+			.unwind("resident")
 			.exec();
-		res.status(200).json(result);
+		res.render("admin/unresolvedComplaints", {
+			complaints: unresolved_complaints,
+			message: message,
+		});
 	} catch (error) {
-		res.status(400).send(error.message);
+		console.log(error);
 	}
+};
+
+module.exports.complaint_detail_page = async (req, res) => {
+	try {
+		const complaint = await Complaint.findById(req.params.id);
+		const resident = await Resident.findById(complaint.residentId);
+		const house = await House.findOne({ residentId: resident._id });
+		res.render("admin/complaintDetails", {
+			complaint: complaint,
+			resident: resident,
+			house: house,
+		});
+		
+	} catch (error) {
+		console.log(error)
+	}
+};
+
+module.exports.resolve_complaint = async (req, res) => {
+	try {
+		await Complaint.findOneAndUpdate(
+			{
+				_id: req.params.id,
+			},
+			{
+				isSolved: true,
+			}
+		);
+		req.session.message = "Complaint resolved Successfully!";
+	} catch (error) {
+		console.log(error);
+		req.session.message = "Error resolving complaint!";
+	}
+	res.redirect("/admin/complaints/unresolved");
 };

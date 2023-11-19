@@ -36,4 +36,4 @@ app.listen(PORT, async () => {
 	console.log("Server started on port: " + PORT);
 });
 
-// require("./Tests/houseInsertions");
+// require("./Tests/complaintInsertions").insert();
