@@ -15,11 +15,11 @@ const {
 	//4
 	generate_bill_page,
 	generate_bill,
+	//5
 	solved_complaints_page,
 	unresolved_complaints_page,
 	complaint_detail_page,
 	resolve_complaint,
-	//5
 } = require("../../controllers/admin/adminController");
 
 const adminRouter = express.Router();
