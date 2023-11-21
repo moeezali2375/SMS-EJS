@@ -240,7 +240,12 @@ h6 {
     left: 173px;
     right: 23px;
 }
-
+.sellalert {
+  position: absolute;
+  top: -64px;
+  left: 209px;
+  right: 1px;
+}
 .card-title {
   padding: 20px 0 15px 0;
   font-size: 32px;
