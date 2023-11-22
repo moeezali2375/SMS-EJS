@@ -20,6 +20,11 @@ const {
 	unresolved_complaints_page,
 	complaint_detail_page,
 	resolve_complaint,
+	//6
+	unverified_visitors,
+	verified_visitors,
+	visitor_detail_page,
+	verify_visitor,
 } = require("../../controllers/admin/adminController");
 
 const adminRouter = express.Router();
@@ -48,8 +53,17 @@ adminRouter.get(
 adminRouter.post("/bills/generate", adminAuth, generate_bill);
 //5
 adminRouter.get("/complaints/resolved", adminAuth, solved_complaints_page);
-adminRouter.get("/complaints/unresolved", adminAuth, unresolved_complaints_page);
+adminRouter.get(
+	"/complaints/unresolved",
+	adminAuth,
+	unresolved_complaints_page
+);
 adminRouter.get("/complaints/:id", adminAuth, complaint_detail_page);
-adminRouter.post("/complaints/:id/resolve",adminAuth,resolve_complaint)
+adminRouter.post("/complaints/:id/resolve", adminAuth, resolve_complaint);
+//6
+adminRouter.get("/visitors/unverified", adminAuth, unverified_visitors);
+adminRouter.get("/visitors/verified", adminAuth, verified_visitors);
+adminRouter.get("/visitors/:id", adminAuth, visitor_detail_page);
+adminRouter.get("/visitors/:id/verify", adminAuth, verify_visitor);
 
 module.exports = adminRouter;

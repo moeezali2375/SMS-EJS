@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const User = require("../../models/user");
 const Resident = require("../../models/resident");
 const House = require("../../models/house");
 const Bill = require("../../models/bill");
 const Complaint = require("../../models/complaint");
+const Visitor = require("../../models/visitor");
 
 const { erate, grate, wrate, daylimit } = require("../../config/index");
 const { due_date, calculate_bill } = require("../../utils/billUtils");
@@ -272,9 +272,8 @@ module.exports.complaint_detail_page = async (req, res) => {
 			resident: resident,
 			house: house,
 		});
-		
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
 };
 
@@ -294,4 +293,79 @@ module.exports.resolve_complaint = async (req, res) => {
 		req.session.message = "Error resolving complaint!";
 	}
 	res.redirect("/admin/complaints/unresolved");
+};
+
+module.exports.unverified_visitors = async (req, res) => {
+	const message = req.session.message;
+	req.session.message = null;
+	try {
+		const unverified_visitors = await Visitor.aggregate([
+			{ $match: { isVerified: false } },
+		])
+			.lookup({
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "registeredBy",
+			})
+			.unwind("registeredBy")
+			.exec();
+		//!
+		console.log(unverified_visitors);
+		res.render("admin/unverifiedVisitors", {
+			visitors: unverified_visitors,
+			message: message,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.verified_visitors = async (req, res) => {
+	try {
+		const verified_visitors = await Visitor.aggregate([
+			{ $match: { isVerified: true } },
+		])
+			.lookup({
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "registeredBy",
+			})
+			.unwind("registeredBy")
+			.exec();
+		//!
+		console.log(verified_visitors);
+		res.render("admin/verifiedVisitors", { visitors: verified_visitors });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.visitor_detail_page = async (req, res) => {
+	try {
+		const visitor = await Visitor.findById(req.params.id);
+		const resident = await Resident.findById(visitor.residentId);
+		console.log(visitor, resident);
+		res.render("admin/visitorDetail", {
+			visitor: visitor,
+			resident: resident,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.verify_visitor = async (req, res) => {
+	let message = null;
+	try {
+		await Visitor.findByIdAndUpdate(req.params.id, {
+			isVerified: true,
+		});
+		message = "Visitor Verified Successfully";
+	} catch (error) {
+		console.log(error);
+		message = "Error Verifying Visitor";
+	}
+	res.redirect("/admin/visitors/unverified");
 };
