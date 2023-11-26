@@ -29,26 +29,28 @@
 
 
             <!-- Table with hoverable rows -->
-            <table class="table table-hover">
+             <!-- Table with hoverable rows -->
+             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
                   <th scope="col">CNIC</th>
-                  <th scope="col">Address</th>
+                  <th scope="col">RegisteredBy</th>
+                  <th scope="col">Date</th>
                  
                 </tr>
               </thead>
               <tbody>
-               
+                <% for(let i=0;i<visitors.length;i++){ %>
                 <tr>
-                  <th scope="row"></th>
-                  <td>bilal</td>
-                  <td>12135467869754</td>
-                  <td>h-424,lahore</td>
-                
+                  <th scope="row"><%=i+1 %></th>
+                  <td><%= visitors[i].name %></td>
+                  <td><%= visitors[i].cnic %></td>
+                  <td><%= visitors[i].registeredBy.name %></td>
+                  <td><%= new Date(visitors[i].date).toLocaleDateString() %></td>
                 </tr>
-             
+                <% } %>
 
               </tbody>
             </table>

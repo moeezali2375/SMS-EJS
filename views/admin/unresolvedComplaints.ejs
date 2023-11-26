@@ -49,7 +49,7 @@
                   </th>
                   <td><%=complaints[i].title%></td>
                   <td><%=complaints[i].resident.name%></td>
-                  <td><%=complaints[i].date%></td>
+                  <td><%=new Date(complaints[i].date).toLocaleDateString()%></td>
                   <td><%=complaints[i].resident.address%></td>
                   <td>
                     <a href="/admin/complaints/<%=complaints[i]._id%>">

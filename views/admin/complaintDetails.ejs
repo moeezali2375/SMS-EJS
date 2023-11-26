@@ -69,7 +69,7 @@
                 <%=resident.address%>
               </h5>
               <h5>
-                Date: <%=complaint.date%>
+                Date: <%=new Date(complaint.date).toLocaleDateString()%>
               </h5>
             </div>
           </div>
