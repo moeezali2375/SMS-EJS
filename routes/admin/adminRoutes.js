@@ -64,6 +64,6 @@ adminRouter.post("/complaints/:id/resolve", adminAuth, resolve_complaint);
 adminRouter.get("/visitors/unverified", adminAuth, unverified_visitors);
 adminRouter.get("/visitors/verified", adminAuth, verified_visitors);
 adminRouter.get("/visitors/:id", adminAuth, visitor_detail_page);
-adminRouter.get("/visitors/:id/verify", adminAuth, verify_visitor);
+adminRouter.post("/visitors/:id/verify", adminAuth, verify_visitor);
 
 module.exports = adminRouter;
