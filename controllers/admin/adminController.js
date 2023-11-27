@@ -6,6 +6,7 @@ const Bill = require("../../models/bill");
 const Complaint = require("../../models/complaint");
 const Visitor = require("../../models/visitor");
 const Booking = require("../../models/booking");
+const Payment = require("../../models/payment");
 
 const { erate, grate, wrate, daylimit } = require("../../config/index");
 const { due_date, calculate_bill } = require("../../utils/billUtils");
@@ -438,4 +439,92 @@ module.exports.verify_booking = async (req, res) => {
 		message = "Error verifying booking!";
 	}
 	res.redirect("/admin/bookings/unverified");
+};
+
+module.exports.get_bills_unpayed = async (req, res) => {
+	let message = req.session.message;
+	req.session.message = null;
+	let bills;
+	try {
+		bills = await Bill.aggregate([
+			{
+				$match: {
+					isPayed: false,
+				},
+			},
+		])
+			.lookup({
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "resident",
+			})
+			.unwind("resident")
+			.exec();
+		console.log(bills);
+	} catch (error) {
+		console.log(error);
+	}
+	res.render("admin/unpaidBills", { bills: bills, message: message });
+};
+
+module.exports.bill_details = async (req, res) => {
+	try {
+		const bill = await Bill.findById(req.params.id);
+		const resident = await Resident.findById(bill.residentId);
+		const payment = await Payment.findOne({ billId: bill._id });
+		console.log(bill, resident, payment);
+		res.render("admin/billDetail", {
+			bill: bill,
+			resident: resident,
+			payment: payment,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.verify_payment = async (req, res) => {
+	let message;
+	try {
+		await Bill.findByIdAndUpdate(req.params.id, {
+			isPayed: true,
+		});
+		message = "Payment verified successfully!";
+	} catch (error) {
+		console.log(error);
+		message = "Error verfying payment!";
+	}
+	res.redirect("/admin/bills/unpaid");
+};
+
+module.exports.get_bills_payed = async (req, res) => {
+	try {
+		let message = req.session.message;
+		req.session.message = null;
+		let bills;
+		try {
+			bills = await Bill.aggregate([
+				{
+					$match: {
+						isPayed: true,
+					},
+				},
+			])
+				.lookup({
+					from: "residents",
+					localField: "residentId",
+					foreignField: "_id",
+					as: "resident",
+				})
+				.unwind("resident")
+				.exec();
+			console.log(bills);
+		} catch (error) {
+			console.log(error);
+		}
+		res.render("admin/paidBills", { bills: bills, message: message });
+	} catch (error) {
+		console.log(error);
+	}
 };

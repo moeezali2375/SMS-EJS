@@ -11,10 +11,6 @@ const paymentSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	amount: {
-		type: Number,
-		required: true,
-	},
 	tid: {
 		type: Number,
 		required: true,

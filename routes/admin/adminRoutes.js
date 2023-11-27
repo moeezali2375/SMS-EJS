@@ -29,6 +29,11 @@ const {
 	unverified_bookings,
 	verified_bookings,
 	verify_booking,
+	//8
+	get_bills_unpayed,
+	get_bills_payed,
+	bill_details,
+	verify_payment,
 } = require("../../controllers/admin/adminController");
 
 const adminRouter = express.Router();
@@ -74,5 +79,8 @@ adminRouter.get("/bookings/unverified", adminAuth, unverified_bookings);
 adminRouter.get("/bookings/verified", adminAuth, verified_bookings);
 adminRouter.post("/bookings/verify", adminAuth, verify_booking);
 //8
-
+adminRouter.get("/bills/unpaid", adminAuth, get_bills_unpayed);
+adminRouter.get("/bills/paid", adminAuth, get_bills_payed);
+adminRouter.get("/bills/:id/details", adminAuth, bill_details);
+adminRouter.post("/bills/:id/verify", adminAuth, verify_payment);
 module.exports = adminRouter;
