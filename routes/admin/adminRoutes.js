@@ -25,6 +25,10 @@ const {
 	verified_visitors,
 	visitor_detail_page,
 	verify_visitor,
+	//7
+	unverified_bookings,
+	verified_bookings,
+	verify_booking,
 } = require("../../controllers/admin/adminController");
 
 const adminRouter = express.Router();
@@ -65,5 +69,10 @@ adminRouter.get("/visitors/unverified", adminAuth, unverified_visitors);
 adminRouter.get("/visitors/verified", adminAuth, verified_visitors);
 adminRouter.get("/visitors/:id", adminAuth, visitor_detail_page);
 adminRouter.post("/visitors/:id/verify", adminAuth, verify_visitor);
+//7
+adminRouter.get("/bookings/unverified", adminAuth, unverified_bookings);
+adminRouter.get("/bookings/verified", adminAuth, verified_bookings);
+adminRouter.post("/bookings/verify", adminAuth, verify_booking);
+//8
 
 module.exports = adminRouter;

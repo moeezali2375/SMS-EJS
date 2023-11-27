@@ -26,31 +26,34 @@
 
         <div class="card">
           <div class="card-body">
-           
+
 
             <!-- Table with hoverable rows -->
-            <form action="/admin/residents/verify" method="post">
+            <form action="/admin/bookings/verify" method="post">
               <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Resident</th>
                     <th scope="col">CNIC</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
                   </tr>
                 </thead>
-                
+
                 <tbody>
-                
+                  <%  for (let i =0;i<bookings.length;i++){%>
                   <tr>
-                    <th scope="row"></th>
-                    <td>affan</td>
-                    <td>123457689658645</td>
-                    <td>Community Hall</td>
-                    <td> <button class="btn btn-primary btn-sm" name="userId" type="submit" value="">Book</button></td>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%=bookings[i].resident.name%></td>
+                    <td><%=bookings[i].resident.cnic  %></td>
+                    <td><%=bookings[i].location  %></td>
+                    <td><%=bookings[i].startTime  %></td>
+                    <td><%=bookings[i].endTime  %></td>
+                    <td> <button class="btn btn-primary btn-sm" name="bookingId" type="submit" value="<%=bookings[i]._id%>">Book</button></td>
                   </tr>
-                
+                  <% } %>
 
                 </tbody>
               </table>

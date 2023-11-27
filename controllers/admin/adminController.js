@@ -5,6 +5,7 @@ const House = require("../../models/house");
 const Bill = require("../../models/bill");
 const Complaint = require("../../models/complaint");
 const Visitor = require("../../models/visitor");
+const Booking = require("../../models/booking");
 
 const { erate, grate, wrate, daylimit } = require("../../config/index");
 const { due_date, calculate_bill } = require("../../utils/billUtils");
@@ -368,4 +369,73 @@ module.exports.verify_visitor = async (req, res) => {
 		message = "Error Verifying Visitor";
 	}
 	res.redirect("/admin/visitors/unverified");
+};
+
+module.exports.unverified_bookings = async (req, res) => {
+	const message = req.session.message;
+	req.session.message = null;
+	let unverified_bookings;
+	try {
+		unverified_bookings = await Booking.aggregate([
+			{
+				$match: {
+					isVerified: false,
+				},
+			},
+		])
+			.lookup({
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "resident",
+			})
+			.unwind("resident")
+			.exec();
+	} catch (error) {
+		console.log(error);
+	}
+	res.render("admin/unverifiedBookings", {
+		bookings: unverified_bookings,
+		message: message,
+	});
+};
+
+module.exports.verified_bookings = async (req, res) => {
+	let verified_bookings;
+	try {
+		verified_bookings = await Booking.aggregate([
+			{
+				$match: {
+					isVerified: true,
+				},
+			},
+		])
+			.lookup({
+				from: "residents",
+				localField: "residentId",
+				foreignField: "_id",
+				as: "resident",
+			})
+			.unwind("resident")
+			.exec();
+	} catch (error) {
+		console.log(error);
+	}
+	res.render("admin/verifiedBookings", {
+		bookings: verified_bookings,
+	});
+};
+
+module.exports.verify_booking = async (req, res) => {
+	let message;
+	try {
+		await Booking.findByIdAndUpdate(req.body.bookingId, {
+			isVerified: true,
+		});
+		message = "Booking verified successfully!";
+	} catch (error) {
+		console.log(error);
+		message = "Error verifying booking!";
+	}
+	res.redirect("/admin/bookings/unverified");
 };

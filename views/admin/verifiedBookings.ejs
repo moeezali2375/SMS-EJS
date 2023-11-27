@@ -29,30 +29,33 @@
 
 
             <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">CNIC</th>
-                  <th scope="col">Type</th>
-                 
-                </tr>
-              </thead>
-              <tbody>
-               
-                <tr>
-                  <th scope="row"></th>
-                  <td>bilal</td>
-                  <td>12135467869754</td>
-                  <td>EventHall</td>
-                
-                </tr>
-             
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Resident</th>
+                    <th scope="col">CNIC</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                  </tr>
+                </thead>
 
-              </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
+                <tbody>
+                  <%  for (let i =0;i<bookings.length;i++){%>
+                  <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%=bookings[i].resident.name%></td>
+                    <td><%=bookings[i].resident.cnic  %></td>
+                    <td><%=bookings[i].location  %></td>
+                    <td><%=bookings[i].startTime  %></td>
+                    <td><%=bookings[i].endTime  %></td>
+                  </tr>
+                  <% } %>
+
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
 
           </div>
         </div>
