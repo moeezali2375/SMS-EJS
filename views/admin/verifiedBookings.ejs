@@ -48,8 +48,8 @@
                     <td><%=bookings[i].resident.name%></td>
                     <td><%=bookings[i].resident.cnic  %></td>
                     <td><%=bookings[i].location  %></td>
-                    <td><%=bookings[i].startTime  %></td>
-                    <td><%=bookings[i].endTime  %></td>
+                    <td><%=new Date(bookings[i].startTime).toLocaleDateString()  %></td>
+                    <td><%=new Date(bookings[i].endTime).toLocaleDateString() %></td>
                   </tr>
                   <% } %>
 
