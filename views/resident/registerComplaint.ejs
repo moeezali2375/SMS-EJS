@@ -1,14 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/resident/resiNavbar.ejs") %>
+<%-include("../partials/resident/resiSidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
-  register complaint page
-</body>
+<main id="main" class="main">
+  <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Register Form</h5>
 
-</html>
+         <div class="pagetitle">
+
+  <form  action="/resident/complaints/register" method="post" class="row g-3 needs-validation" novalidate>
+
+    <div class="col-12">
+      <label for="billType" class="form-label"></label>
+      <div >
+        <fieldset class="row mb-3">
+
+         
+        
+              <div class="col-12">
+                  <label for="title" class="form-label"><h4>Title:</h4></label>
+                  <input type="text" name="name" class="form-control" id="title" required>
+                  <div class="invalid-feedback">Please enter title!</div>
+              </div>
+            </div>
+          
+       
+      </div>
+
+      <div class="col-12">
+       <label for="date" class="form-label"><h4>Date:</h4></label>
+       <input type="date" id="date" name="date"  class="form-control" required>
+       <div class="invalid-feedback">Please enter date!</div>
+      </div>
+      <div class="col-12">
+        <label for="description" class="form-label"><h4>Description:</h4></label>
+        <input type="text" name="description" class="form-control" id="description" required>
+        <div class="invalid-feedback">Please enter description!</div>
+      </div>
+      <br>
+      <div class="col-12">
+        <button  class="btn btn-primary w-100" type="submit">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+
+</div>
+</div>
+</div>
+</section>
+</main>
+
+
+
+
+<script>
+  function validateCNIC() {
+    var cnicInput = document.getElementById('cnic');
+    var cnicRegex = /^[0-9]{5}-[0-9]{7}-[0-9]$/;
+
+    if (!cnicRegex.test(cnicInput.value)) {
+      alert('Please enter a valid CNIC number (e.g., 12345-1234567-1)');
+      cnicInput.focus();
+      return false;
+    }
+
+    return true;
+  }
+</script>
+
+
+<%-include("../partials/footer.ejs") %>
