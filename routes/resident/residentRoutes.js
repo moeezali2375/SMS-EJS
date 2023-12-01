@@ -48,7 +48,7 @@ residentRouter.get("/complaints/solved", residentAuth, solved_complaints);
 residentRouter.get("/complaints/unsolved", residentAuth, unsolved_complaints);
 
 residentRouter.get(
-	"/complaints/:id/detail",
+	"/complaints/:id/details",
 	residentAuth,
 	complaint_detail_page
 );
