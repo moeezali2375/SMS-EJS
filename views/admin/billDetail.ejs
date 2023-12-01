@@ -118,7 +118,7 @@ payment ka card -->
           <hr>
           <div class="pagetitle">
             <% if (payment){ %>
-            <form action="/admin/bills/verify" method="post" class="row g-3 needs-validation" novalidate>
+         
 
               <div class="col-12">
                 <h3>TID:<%= payment.tid%></h3>
@@ -129,7 +129,6 @@ payment ka card -->
 
 
 
-            </form>
             <% }else { %>
               <h4>No payment detail uploaded! 🥲</h4>
             <% } %>
