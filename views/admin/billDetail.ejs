@@ -59,22 +59,47 @@ payment ka card -->
                 </div>
               </div>
 
-              <h5>
+              <h4>
                 <%=resident.cnic  %>
-              </h5>
+              </h4>
+              <h4>
               <%=resident.address%>
-              </h5>
+              </h4>
 
             </div>
           </div>
         </div>
       </div>
+    <div class="col-lg-12">
+
       <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Old Units: <%=bill.oldUnits%></h5>
-          <h5 class="card-title">Current Units: <%=bill.currentUnits%></h5>
+        <div class="card-body" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+            <div style="flex-basis: 18%;">
+                <h5 class="card-title">Bill: <span style="display: inline-block; color: black;"><h3>
+                    <% if(bill.billType==0) { %>
+                        Electricity
+                    <% } else if(bill.billType==1) { %>
+                        Gas
+                    <% } else if(bill.billType==2) { %>
+                        Water
+                    <% } %>
+                    </h3></span>
+                </h5>
+                <h5 class="card-title">Old Units: <span style="display: inline-block; color: black;"><h3><%=bill.oldUnits%></h3></span></h5>
+            </div>
+              <div style="flex-basis: 74%;">
+                <h5 class="card-title">Current Units: <span style="display: inline-block; color: black;"><h3><%=bill.currentUnits%></h3></span></h5>
+                <h5 class="card-title">DueDate: <span style="display: inline-block; color: black;"><h3><%=new Date(bill.dueDate).toLocaleDateString()%></h3></span></h5>
+                
+             </div>
+             <div style="flex-basis: 74%;">
+                <h5 class="card-title">Amount: <span style="display: inline-block; color: black;"><h3><%=bill.amount%></h3></span></h5>
+                </div>
         </div>
-      </div>
+    </div>
+    
+</div>
+    
 
 
 
@@ -82,7 +107,7 @@ payment ka card -->
     </div>
 
 
-    <div class="col-lg-6">
+    <div class="col-lg-12">
 
       <div class="card">
         <div class="card-body">
