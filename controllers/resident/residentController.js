@@ -27,8 +27,8 @@ module.exports.get_bills_unpaid = async (req, res) => {
 
 module.exports.bill_detail_page = async (req, res) => {
 	try {
-		const bill = await Bill.findOne(req.params.id);
-		const payment = await Payment.findOne(bill._id);
+		const bill = await Bill.findById(req.params.id);
+		const payment = await Payment.findById(bill._id);
 		res.render("resident/billDetail", { bill: bill, payment: payment });
 	} catch (error) {
 		console.log(error);
