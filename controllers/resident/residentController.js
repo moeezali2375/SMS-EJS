@@ -73,7 +73,7 @@ module.exports.unverified_visitors = async (req, res) => {
 			residentId: req.user._id,
 			isVerified: false,
 		});
-		res.render("resident/verifiedVisitors", {
+		res.render("resident/unverifiedVisitors", {
 			visitors: visitors,
 			message: message,
 		});
