@@ -53,7 +53,7 @@ residentRouter.get(
 	complaint_detail_page
 );
 
-residentRouter.get(
+residentRouter.post(
 	"/complaints/register",
 	residentAuth,
 	register_complaint_page
