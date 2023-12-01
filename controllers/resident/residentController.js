@@ -1,62 +1,54 @@
 const Bill = require("../../models/bill");
 const Payment = require("../../models/payment");
-const Image = require("../../models/image");
-const upload = require("../../middlewares/multer");
-
-const { default: mongoose } = require("mongoose");
 
 module.exports.home = (req, res) => {
 	res.render("resident/home");
 };
 
-module.exports.get_bills = async (req, res) => {
+module.exports.get_bills_paid = async (req, res) => {
 	try {
-		const query = {};
-		if (req.query.isPayed) query.isPayed = req.query.isPayed;
-		query.residentId = req.user._id;
-		const bills = await Bill.find(query);
-		res.status(200).json(bills);
+		const bills = await Bill.find({ residentId: req.user._id, isPayed: true });
+		res.render("resident/paidBills", { bills: bills });
 	} catch (error) {
-		res.status(400).send(error.message);
+		console.log(error);
 	}
 };
 
-// module.exports.payment_details = async (req, res) => {
-// 	upload(req, res, (err) => {
-// 		if (err) {
-// 			res.status(400).send(err.message);
-// 		} else {
-// 			const newImage = new Image({
-// 				name: req.body.name,
-// 				image: {
-// 					data: req.file.filename,
-// 					contentType: "image/png",
-// 				},
-// 			});
-// 			newImage
-// 				.save()
-// 				.then(() => {
-// 					res.status(200).send("Picture Uploaded Successfully!");
-// 				})
-// 				.catch((err) => {
-// 					res.status(400).send(err.message);
-// 				});
-// 		}
-// 	});
-// };
+module.exports.get_bills_unpaid = async (req, res) => {
+	try {
+		const message = req.session.message;
+		req.session.message = null;
+		const bills = await Bill.find({ residentId: req.user._id, isPayed: false });
+		res.render("resident/unpaidBills", { bills: bills, message: message });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.bill_detail_page = async (req, res) => {
+	try {
+		const bill = await Bill.findOne(req.params.id);
+		const payment = await Payment.findOne(bill._id);
+		res.render("resident/billDetail", { bill: bill, payment: payment });
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 module.exports.pay_bill = async (req, res) => {
+	let message;
 	try {
-		const { billId, bank, amount, tid } = req.body;
+		const { billId, bank, tid } = req.body;
 		await Payment.insertMany({
 			billId: billId,
 			bank: bank,
-			amount: amount,
 			tid: tid,
 			date: new Date(),
 		});
-		res.status(201).send("Payment Details Added Successfully!");
+		message = "Payment information uploaded successfully!";
 	} catch (error) {
-		res.status(400).send(error.message);
+		console.log(error);
+		message = "Error uploading payment information!";
 	}
+	res.redirect("/resident/bills/unpaid");
 };

@@ -1,5 +1,4 @@
 module.exports.residentAuth = (req, res, next) => {
-	console.log(req.user);
 	if (req.isAuthenticated() && !req.user.user.isAdmin) {
 		if (req.user.isVerified) {
 			return next();

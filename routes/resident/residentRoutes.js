@@ -3,19 +3,21 @@ const express = require("express");
 const { residentAuth } = require("../../middlewares/residentAuth");
 const {
 	home,
-	get_bills,
-	// payment_details,
-	pay_bill,
+	get_bills_paid,
+	get_bills_unpaid,
+	bill_detail_page,
 } = require("../../controllers/resident/residentController");
 
 const residentRouter = express.Router();
 
 residentRouter.get("/home", residentAuth, home);
 
-residentRouter.get("/bills", residentAuth, get_bills);
+residentRouter.get("/bills/paid", residentAuth, get_bills_paid);
 
-residentRouter.post("/bills/pay", residentAuth, pay_bill);
+residentRouter.get("/bills/unpaid", residentAuth, get_bills_unpaid);
 
-// residentRouter.post("/bills/payment-details", residentAuth, payment_details);
+residentRouter.get("/bills/:id/details", residentAuth, bill_detail_page);
+
+residentRouter.post("/bills/:id/pay", residentAuth);
 
 module.exports = residentRouter;
