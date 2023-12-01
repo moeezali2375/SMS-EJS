@@ -1,6 +1,7 @@
 const Bill = require("../../models/bill");
 const Payment = require("../../models/payment");
 const Visitor = require("../../models/visitor");
+const Complaint = require("../../models/complaint");
 
 module.exports.home = (req, res) => {
 	res.render("resident/home");
@@ -102,7 +103,7 @@ module.exports.register_visitor_page = async (req, res) => {
 module.exports.register_visitor = async (req, res) => {
 	try {
 		const { name, cnic, reason, date } = req.body;
-		await Visitor.insertOne({
+		await Visitor.insertMany({
 			residentId: req.user._id,
 			name: name,
 			cnic: cnic,
@@ -115,4 +116,69 @@ module.exports.register_visitor = async (req, res) => {
 		req.session.message = "Error Verifying Visitor";
 	}
 	res.redirect("/resident/visitors/unverified");
+};
+
+module.exports.solved_complaints = async (req, res) => {
+	try {
+		const complaints = await Complaint.find({
+			residentId: req.user._id,
+			isSolved: true,
+		});
+		res.render("resident/solvedComplaints", {
+			complaints: complaints,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.unsolved_complaints = async (req, res) => {
+	try {
+		const message = req.session.message;
+		req.session.message = null;
+		const complaints = await Complaint.find({
+			residentId: req.user._id,
+			isSolved: false,
+		});
+		res.render("resident/unsolvedComplaints", {
+			complaints: complaints,
+			message: message,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.complaint_detail_page = async (req, res) => {
+	try {
+		const complaint = await Complaint.findById(req.params.id);
+		res.render("resident/complaintDetail", { complaint: complaint });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.register_complaint_page = async (req, res) => {
+	try {
+		res.render("resident/registerComplaint");
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.register_complaint = async (req, res) => {
+	try {
+		const { title, description, date } = req.body;
+		await Complaint.insertMany({
+			residentId: req.user._id,
+			title: title,
+			description: description,
+			date: date,
+		});
+		req.session.message = "Complaint registered successfully!";
+	} catch (error) {
+		console.log(error);
+		req.session.message = "Error registering complaint!";
+	}
+	res.redirect("/resident/complaints/unsolved");
 };

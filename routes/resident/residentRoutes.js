@@ -13,6 +13,11 @@ const {
 	visitor_detail_page,
 	register_visitor,
 	register_visitor_page,
+	solved_complaints,
+	unsolved_complaints,
+	complaint_detail_page,
+	register_complaint_page,
+	register_complaint,
 	//2
 } = require("../../controllers/resident/residentController");
 
@@ -34,12 +39,26 @@ residentRouter.get("/visitors/unverified", residentAuth, unverified_visitors);
 
 residentRouter.get("/visitors/:id/details", residentAuth, visitor_detail_page);
 
-residentRouter.get(
-	"/visitors/register",
-	residentAuth,
-	register_visitor_page
-);
+residentRouter.get("/visitors/register", residentAuth, register_visitor_page);
 
 residentRouter.post("/visitors/register", residentAuth, register_visitor);
+
+residentRouter.get("/complaints/solved", residentAuth, solved_complaints);
+
+residentRouter.get("/complaints/unsolved", residentAuth, unsolved_complaints);
+
+residentRouter.get(
+	"/complaints/:id/detail",
+	residentAuth,
+	complaint_detail_page
+);
+
+residentRouter.get(
+	"/complaints/register",
+	residentAuth,
+	register_complaint_page
+);
+
+residentRouter.post("/complaints/register", residentAuth, register_complaint);
 
 module.exports = residentRouter;
