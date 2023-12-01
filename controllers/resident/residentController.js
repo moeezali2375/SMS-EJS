@@ -91,6 +91,14 @@ module.exports.visitor_detail_page = async (req, res) => {
 	}
 };
 
+module.exports.register_visitor_page = async (req, res) => {
+	try {
+		res.render("resident/registerVisitor");
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 module.exports.register_visitor = async (req, res) => {
 	try {
 		const { name, cnic, reason, date } = req.body;

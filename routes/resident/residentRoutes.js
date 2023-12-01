@@ -12,6 +12,7 @@ const {
 	unverified_visitors,
 	visitor_detail_page,
 	register_visitor,
+	register_visitor_page,
 	//2
 } = require("../../controllers/resident/residentController");
 
@@ -32,6 +33,12 @@ residentRouter.get("/visitors/verified", residentAuth, verified_visitors);
 residentRouter.get("/visitors/unverified", residentAuth, unverified_visitors);
 
 residentRouter.get("/visitors/:id/details", residentAuth, visitor_detail_page);
+
+residentRouter.get(
+	"/visitors/register",
+	residentAuth,
+	register_visitor_page
+);
 
 residentRouter.post("/visitors/register", residentAuth, register_visitor);
 
