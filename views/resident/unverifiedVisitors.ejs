@@ -1,14 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/resident/resiNavbar.ejs") %>
+<%-include("../partials/resident/resiSidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
-  Unverfied Visitor Page
-</body>
 
-</html>
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Unverified Visitors</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Visitors</li>
+        <li class="breadcrumb-item active">Unverified</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row-lg-6">
+      <div class="col-lg-12">
+
+
+
+
+        <div class="card">
+          <div class="card-body">
+           
+            <% if (message){ %>
+              <div class="sellalert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <i class="bi bi-exclamation-octagon me-1"></i>
+                  <%= message %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </div>
+              <% } %>
+
+         
+            <!-- Table with hoverable rows -->
+          
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">CNIC</th>
+                
+                  <th scope="col">Date</th>
+               
+                </tr>
+              </thead>
+              <tbody>
+                
+                <% for(let i=0;i<visitors.length;i++){ %>
+                <tr>
+                  <th scope="row"><%=i+1 %></th>
+                  <td><%= visitors[i].name %></td>
+                  <td><%= visitors[i].cnic %></td>
+               
+                  <td><%= new Date(visitors[i].date).toLocaleDateString() %></td>
+                 
+                  <td> <a href="/resident/visitors/<%=visitors[i]._id%>/details">
+                      <button class="btn btn-primary btn-sm" name="userId" type="submit" ">Detail </button></td>
+                  </a>
+                </tr>
+                <% } %>
+
+              </tbody>
+            </table>
+              <!-- End Table with hoverable rows -->
+
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+
+
+<%-include("../partials/footer.ejs") %>
