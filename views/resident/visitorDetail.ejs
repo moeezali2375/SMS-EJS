@@ -1,14 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/resident/resiNavbar.ejs") %>
+<%-include("../partials/resident/resiSidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
-  Visitor Detail Page
-</body>
+<main id="main" class="main">
 
-</html>
+  <div class="pagetitle">
+    <h1>Visitor</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Visitor</li>
+        <li class="breadcrumb-item active">Details</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Visitor:
+            </h5>
+            <h3>
+              <%=visitor.name%>
+            </h3>
+            <h5 class="card-title">
+              Cnic:
+            </h5>
+            <h3>
+              <%=visitor.cnic%>
+            </h3>
+            <h5 class="card-title">
+              Reason:
+            </h5>
+            <h3>
+              <%=visitor.reason%>
+            </h3>
+          </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+
+<%-include("../partials/footer.ejs") %>
