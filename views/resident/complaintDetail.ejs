@@ -1,14 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/resident/resiNavbar.ejs") %>
+<%-include("../partials/resident/resiSidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+<main id="main" class="main">
 
-<body>
-  Complaint Detail Page
-</body>
+  <div class="pagetitle">
+    <h1>Complaint</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Complaint</li>
+        <li class="breadcrumb-item active">Details</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-</html>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+      
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Title:
+            </h5>
+            <h3>
+              <%=complaint.title%>
+            </h3>
+            <h5 class="card-title">
+             Date:
+            </h5>
+            <h3>
+              <%=new Date(complaint.date).toLocaleDateString()%>
+            </h3>
+            <h5 class="card-title">
+              Description:
+             </h5>
+             <h3>
+               <%=complaint.description%>
+             </h3>
+          </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+
+<%-include("../partials/footer.ejs") %>

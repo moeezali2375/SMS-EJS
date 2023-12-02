@@ -1,14 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/resident/resiNavbar.ejs") %>
+<%-include("../partials/resident/resiSidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
-  Unsolved Complaints Page
-</body>
 
-</html>
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Unresolved Complaints</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Complaints</li>
+        <li class="breadcrumb-item active">Unresolved</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section">
+    <div class="row-lg-6">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <% if (message){ %>
+            <div class="calert">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+            <% } %>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                
+                  <th scope="col">Date</th>
+                 
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i =0;i<complaints.length;i++){ %>
+                <tr>
+                  <th scope="row">
+                    <%= i+1 %>
+                  </th>
+                  <td><%=complaints[i].title%></td>
+                 
+                  <td><%=new Date(complaints[i].date).toLocaleDateString()%></td>
+                
+                  <td>
+                    <a href="/resident/complaints/<%=complaints[i]._id%>/details">
+                      <button class="btn btn-primary btn-sm" name="complaintId" type="button">Details
+                      </button>
+                    </a>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+<%-include("../partials/footer.ejs") %>
