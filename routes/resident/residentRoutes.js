@@ -20,6 +20,10 @@ const {
 	register_complaint,
 	update_profile,
 	update_profile_page,
+	verified_bookings,
+	unverified_bookings,
+	register_booking_page,
+	register_booking,
 	//2
 } = require("../../controllers/resident/residentController");
 
@@ -66,5 +70,13 @@ residentRouter.post("/complaints/register", residentAuth, register_complaint);
 residentRouter.get("/profile/update", residentAuth, update_profile_page);
 
 residentRouter.post("/profile/update", residentAuth, update_profile);
+
+residentRouter.get("/bookings/verified", residentAuth, verified_bookings);
+
+residentRouter.get("/bookings/unverified", residentAuth, unverified_bookings);
+
+residentRouter.get("/bookings/register", residentAuth, register_booking_page);
+
+residentRouter.post("/bookings/register", residentAuth, register_booking);
 
 module.exports = residentRouter;
