@@ -233,6 +233,7 @@ module.exports.verified_bookings = async (req, res) => {
 			residentId: req.user._id,
 			isVerified: true,
 		});
+		console.log(bookings);
 		res.render("resident/verifiedBookings", { bookings: bookings });
 	} catch (error) {
 		console.log(error);
@@ -247,7 +248,7 @@ module.exports.unverified_bookings = async (req, res) => {
 			residentId: req.user._id,
 			isVerified: false,
 		});
-		res.render("resident/verifiedBookings", { bookings: bookings });
+		res.render("resident/unverifiedBookings", { bookings: bookings });
 	} catch (error) {
 		console.log(error);
 	}
