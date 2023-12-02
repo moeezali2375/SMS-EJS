@@ -248,7 +248,10 @@ module.exports.unverified_bookings = async (req, res) => {
 			residentId: req.user._id,
 			isVerified: false,
 		});
-		res.render("resident/unverifiedBookings", { bookings: bookings });
+		res.render("resident/unverifiedBookings", {
+			bookings: bookings,
+			message: message,
+		});
 	} catch (error) {
 		console.log(error);
 	}
