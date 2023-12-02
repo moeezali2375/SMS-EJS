@@ -230,7 +230,7 @@ module.exports.update_profile = async (req, res) => {
 module.exports.verified_bookings = async (req, res) => {
 	try {
 		const bookings = await Booking.find({
-			residentId: req.user.id,
+			residentId: req.user._id,
 			isVerified: true,
 		});
 		res.render("resident/verifiedBookings", { bookings: bookings });
@@ -244,7 +244,7 @@ module.exports.unverified_bookings = async (req, res) => {
 		let message = req.session.message;
 		req.session.message = null;
 		const bookings = await Booking.find({
-			residentId: req.user.id,
+			residentId: req.user._id,
 			isVerified: false,
 		});
 		res.render("resident/verifiedBookings", { bookings: bookings });
