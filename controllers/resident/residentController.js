@@ -4,6 +4,7 @@ const Bill = require("../../models/bill");
 const Payment = require("../../models/payment");
 const Visitor = require("../../models/visitor");
 const Complaint = require("../../models/complaint");
+const Booking = require("../../models/booking");
 
 const { validatePassword, genPassword } = require("../../utils/passwordUtils");
 
@@ -194,6 +195,7 @@ module.exports.update_profile_page = async (req, res) => {
 		console.log(error);
 	}
 };
+
 module.exports.update_profile = async (req, res) => {
 	try {
 		const { username, email, old_password, new_password } = req.body;
@@ -223,4 +225,56 @@ module.exports.update_profile = async (req, res) => {
 		req.session.message = "Error updating profile!";
 	}
 	res.redirect("/resident/home");
+};
+
+module.exports.verified_bookings = async (req, res) => {
+	try {
+		const bookings = await Booking.find({
+			residentId: req.user.id,
+			isVerified: true,
+		});
+		res.render("resident/verifiedBookings", { bookings: bookings });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.unverified_bookings = async (req, res) => {
+	try {
+		let message = req.session.message;
+		req.session.message = null;
+		const bookings = await Booking.find({
+			residentId: req.user.id,
+			isVerified: false,
+		});
+		res.render("resident/verifiedBookings", { bookings: bookings });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.register_booking_page = async (req, res) => {
+	try {
+		res.render("resident/registerBooking");
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+module.exports.register_booking = async (req, res) => {
+	let message;
+	try {
+		const { location, startTime, endTime } = req.body;
+		await Booking.insertMany({
+			residentId: req.user._id,
+			location: location,
+			startTime: startTime,
+			endTime: endTime,
+		});
+		message = "Booking registered successfully!";
+	} catch (error) {
+		console.log(error);
+		message = "Error in booking!";
+	}
+	res.redirect("/resident/bookings/unverified");
 };

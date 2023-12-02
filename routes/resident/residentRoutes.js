@@ -64,6 +64,7 @@ residentRouter.post(
 residentRouter.post("/complaints/register", residentAuth, register_complaint);
 
 residentRouter.get("/profile/update", residentAuth, update_profile_page);
+
 residentRouter.post("/profile/update", residentAuth, update_profile);
 
 module.exports = residentRouter;
