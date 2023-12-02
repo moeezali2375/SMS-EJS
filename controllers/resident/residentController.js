@@ -1,7 +1,11 @@
+const User = require("../../models/user");
+const Resident = require("../../models/resident");
 const Bill = require("../../models/bill");
 const Payment = require("../../models/payment");
 const Visitor = require("../../models/visitor");
 const Complaint = require("../../models/complaint");
+
+const { validatePassword, genPassword } = require("../../utils/passwordUtils");
 
 module.exports.home = (req, res) => {
 	res.render("resident/home");
@@ -181,4 +185,42 @@ module.exports.register_complaint = async (req, res) => {
 		req.session.message = "Error registering complaint!";
 	}
 	res.redirect("/resident/complaints/unsolved");
+};
+
+module.exports.update_profile_page = async (req, res) => {
+	try {
+		res.render("resident/updateProfile");
+	} catch (error) {
+		console.log(error);
+	}
+};
+module.exports.update_profile = async (req, res) => {
+	try {
+		const { username, email, old_password, new_password } = req.body;
+		if (username) {
+			await User.findByIdAndUpdate(req.user.user._id, { username: username });
+		}
+		// if (email) {
+		// 	query.email = email;
+		// }
+		if (old_password || new_password) {
+			const isValid = validatePassword(
+				old_password,
+				req.user.user.hash,
+				req.user.user.salt
+			);
+			if (isValid) {
+				const { salt, hash } = genPassword(new_password);
+				await User.findByIdAndUpdate(req.user.user._id, {
+					salt: salt,
+					hash: hash,
+				});
+			}
+		}
+		req.session.message = "Profile updated successfully!";
+	} catch (error) {
+		console.log(error);
+		req.session.message = "Error updating profile!";
+	}
+	res.redirect("/resident/home");
 };
