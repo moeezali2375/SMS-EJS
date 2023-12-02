@@ -1,14 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
+<%-include("../partials/header.ejs") %>
+<%-include("../partials/resident/resiNavbar.ejs") %>
+<%-include("../partials/resident/resiSidebar.ejs") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+<main id="main" class="main">
+  <section class="section"> 
+     <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Update Credentials Form</h5>
 
-<body>
-  Update Profile Page
-</body>
+         <div class="pagetitle">
 
-</html>
+  <form  action="/resident/profile/update" method="post" class="row g-3 needs-validation" novalidate onsubmit="validateForm()">
+
+    <div class="col-12">
+      <label for="billType" class="form-label"></label>
+      <div >
+        <fieldset class="row mb-3">
+
+         
+        
+              <div class="col-12">
+                  <label for="username" class="form-label"><h4>Username:</h4></label>
+                  <input type="text" name="username" class="form-control" id="username" required>
+                  <div class="invalid-feedback">Please enter username!</div>
+              </div>
+            </div>
+          
+       
+      </div>
+
+      <div class="col-12">
+        <label for="oldPassword" class="form-label"><h4>Old Password:</h4></label>
+        <input type="password" name="old_password" class="form-control" id="old_password" required>
+        <div class="invalid-feedback">Please enter oldPassword!</div>
+      </div>
+      <div class="col-12">
+        <label for="newPassword" class="form-label"><h4>New Password:</h4></label>
+        <input type="password" name="new_password" class="form-control" id="new_password" required>
+        <div class="invalid-feedback">Please enter newPassword!</div>
+      </div>
+      <div class="col-12">
+        <label for="confirmPassword" class="form-label"><h4>Confirm Password:</h4></label>
+        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+        <div class="invalid-feedback">Please enter confirmPassword!</div>
+      </div>
+      <br>
+      <div class="col-12">
+        <button  class="btn btn-primary w-100" type="submit">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+
+</div>
+</div>
+</div> -->
+
+
+
+
+<script>
+  function validateForm() {
+    if (!validatePasswordMatch()) {
+      return false;
+    }
+    // Add other validations if needed
+    return true;
+  }
+
+  function validatePasswordMatch() {
+    var newPassword = document.getElementById('newPassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (newPassword !== confirmPassword) {
+      document.getElementById('passwordMismatchFeedback').style.display = 'block';
+      return false;
+    } else {
+      document.getElementById('passwordMismatchFeedback').style.display = 'none';
+      return true;
+    }
+  }
+</script>
+
+
+
+
+
+
+<%-include("../partials/footer.ejs") %>
