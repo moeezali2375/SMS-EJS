@@ -9,7 +9,7 @@
     <h1>Verified visitors</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
         <li class="breadcrumb-item">Visitors</li>
         <li class="breadcrumb-item active">Verified</li>
       </ol>
@@ -38,6 +38,7 @@
                   <th scope="col">CNIC</th>
                   <th scope="col">RegisteredBy</th>
                   <th scope="col">Date</th>
+                  <th scope="col">Detail</th>
                  
                 </tr>
               </thead>
@@ -49,6 +50,10 @@
                   <td><%= visitors[i].cnic %></td>
                   <td><%= visitors[i].registeredBy.name %></td>
                   <td><%= new Date(visitors[i].date).toLocaleDateString() %></td>
+                  <td> <a href="/admin/visitors/<%=visitors[i]._id%>">
+                    <button class="btn btn-primary btn-sm" name="userId" type="submit" ">Detail </button></td>
+                </a>
+              </tr>
                 </tr>
                 <% } %>
 

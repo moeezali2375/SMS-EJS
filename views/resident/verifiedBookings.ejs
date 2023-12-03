@@ -8,7 +8,7 @@
     <h1>Verified Bookings</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/resident/home">Home</a></li>
         <li class="breadcrumb-item">Bookings</li>
         <li class="breadcrumb-item active">Verified</li>
       </ol>
@@ -45,8 +45,8 @@
                     <th scope="row"><%=i+1%></th>
                   
                     <td><%=bookings[i].location  %></td>
-                    <td><%=new Date(bookings[i].startTime).toLocaleDateString()  %></td>
-                    <td><%=new Date(bookings[i].endTime).toLocaleDateString() %></td>
+                    <td><%= new Date(bookings[i].startTime).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) %></td>
+                    <td><%= new Date(bookings[i].endTime).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) %></td>
                   </tr>
                   <% } %>
 

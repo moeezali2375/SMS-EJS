@@ -103,9 +103,19 @@ payment ka card -->
       
                         <div class="col-12">
                           <label for="bank" class="form-label"><h4>Bank:</h4></label>
-                          <input type="text" name="bank" class="form-control" id="bank" required>
-                          <div class="invalid-feedback">Please enter name of bank!</div>
+                          <select name="bank" class="form-control" id="bank" required>
+                            <option value="" disabled selected>Select a Bank</option>
+                            <option value="habib_bank">Habib Bank Limited</option>
+                            <option value="mcbonk">MCB Bank Limited</option>
+                            <option value="ubl">United Bank Limited (UBL)</option>
+                            <option value="askari">Askari Bank Limited</option>
+                            <option value="abl">Allied Bank Limited (ABL)</option>
+                            <option value="hbl">Habib Metropolitan Bank</option>
+                            <!-- Add more options for other banks as needed -->
+                          </select>
+                          <div class="invalid-feedback">Please select a bank!</div>
                         </div>
+                        
                         <br>
                         <div class="col-12">
                           <button name="billId" value="<%=bill._id%>" class="btn btn-primary w-100" type="submit">Submit</button>

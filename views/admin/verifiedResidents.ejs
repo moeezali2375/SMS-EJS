@@ -9,7 +9,7 @@
     <h1>Verified Residents</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
         <li class="breadcrumb-item">Residents</li>
         <li class="breadcrumb-item active">Verified</li>
       </ol>
@@ -47,7 +47,7 @@
                   <td><%= residents[i].cnic %></td>
                   <td><%= residents[i].address %></td>
                   <td> <a href="/admin/residents/verified/<%=residents[i]._id%>">
-                      <button class="btn btn-primary btn-sm" name="userId" type="submit" ">List </button></td>
+                      <button class="btn btn-primary btn-sm" name="userId" type="submit" ">Detail </button></td>
                   </a>
                 </tr>
                 <% } %>

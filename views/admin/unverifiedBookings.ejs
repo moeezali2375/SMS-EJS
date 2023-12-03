@@ -9,7 +9,7 @@
     <h1>Unverified Bookings</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
         <li class="breadcrumb-item">Bookings</li>
         <li class="breadcrumb-item active">Unverified</li>
       </ol>
@@ -39,6 +39,7 @@
                     <th scope="col">Location</th>
                     <th scope="col">Start Time</th>
                     <th scope="col">End Time</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
 
@@ -49,8 +50,8 @@
                     <td><%=bookings[i].resident.name%></td>
                     <td><%=bookings[i].resident.cnic  %></td>
                     <td><%=bookings[i].location  %></td>
-                    <td><%= new Date(bookings[i].startTime).toLocaleDateString()  %></td>
-                    <td><%= new Date(bookings[i].endTime).toLocaleDateString()  %></td>
+                    <td><%= new Date(bookings[i].startTime).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) %></td>
+                    <td><%=  new Date(bookings[i].endTime).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',  hour12: true }) %></td>
                     <td> <button class="btn btn-primary btn-sm" name="bookingId" type="submit" value="<%=bookings[i]._id%>">Book</button></td>
                   </tr>
                   <% } %>

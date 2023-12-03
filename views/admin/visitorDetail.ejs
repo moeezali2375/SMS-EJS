@@ -8,8 +8,8 @@
     <h1>Visitor</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item">Visitor</li>
+        <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
+        <li class="breadcrumb-item"><a href="/admin/visitors/verified">Visitor</a></li>
         <li class="breadcrumb-item active">Details</li>
       </ol>
     </nav>
@@ -66,7 +66,7 @@
                 <%=resident.address%>
               </h5>
               <h5>
-                Date: <%=visitor.date%>
+                Date: <%= new Date(visitor.date).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }) %>
               </h5>
             </div>
           </div>
