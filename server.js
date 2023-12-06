@@ -32,7 +32,7 @@ app.use(passportMiddleware.session);
 app.use("/", router);
 
 //! ------------------APP-----------------------
-app.listen(PORT, async () => {
+app.listen(PORT, "0.0.0.0", async () => {
 	console.log("Server started on port: " + PORT);
 });
 

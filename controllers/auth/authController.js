@@ -63,12 +63,12 @@ module.exports.register = async (req, res) => {
 
 		await session.commitTransaction();
 		session.endSession();
-		res.redirect("/auth/login");
 	} catch (error) {
 		await session.abortTransaction();
 		session.endSession();
-		res.render("error/400");
+		console.log(error);
 	}
+	res.redirect("/auth/login");
 };
 
 module.exports.logout = (req, res) => {

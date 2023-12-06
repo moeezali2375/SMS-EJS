@@ -11,8 +11,29 @@ const Payment = require("../../models/payment");
 const { erate, grate, wrate, daylimit } = require("../../config/index");
 const { due_date, calculate_bill } = require("../../utils/billUtils");
 
-module.exports.home = (req, res) => {
-	res.render("admin/home");
+module.exports.home = async (req, res) => {
+	const residents = await Resident.find();
+	const verified_residents = await Resident.find({ isVerified: true });
+	const unverified_residents = await Resident.find({ isVerified: false });
+	const resolved_complaints = await Complaint.find({ isSolved: true });
+	const unresolved_complaints = await Complaint.find({ isSolved: false });
+	const verified_visitors = await Visitor.find({ isVerified: true });
+	const unverified_visitors = await Visitor.find({ isVerified: false });
+	const bills = await Bill.find();
+	const paid_bills = await Bill.find({ isPayed: true });
+	const unpaid_bills = await Bill.find({ isPayed: false });
+	res.render("admin/home", {
+		residents: residents,
+		verified_residents: verified_residents,
+		unverified_residents: unverified_residents,
+		resolved_complaints: resolved_complaints,
+		unresolved_complaints: unresolved_complaints,
+		verified_visitors: verified_visitors,
+		unverified_visitors: unverified_visitors,
+		bills: bills,
+		paid_bills: paid_bills,
+		unpaid_bills: unpaid_bills,
+	});
 };
 
 module.exports.get_unverified_residents = async (req, res) => {

@@ -8,10 +8,55 @@ const Booking = require("../../models/booking");
 
 const { validatePassword, genPassword } = require("../../utils/passwordUtils");
 
-module.exports.home = (req, res) => {
-	res.render("resident/home");
+module.exports.home = async (req, res) => {
+	const name = req.user.name;
+	const address = req.user.address;
+	const verified_bookings = await Booking.find({
+		residentId: req.user._id,
+		isVerified: true,
+	});
+	const unverified_bookings = await Booking.find({
+		residentId: req.user._id,
+		isVerified: false,
+	});
+	const resolved_complaints = await Complaint.find({
+		residentId: req.user._id,
+		isSolved: true,
+	});
+	const unresolved_complaints = await Complaint.find({
+		residentId: req.user._id,
+		isSolved: false,
+	});
+	const unverified_visitors = await Visitor.find({
+		residentId: req.user._id,
+		isVerified: false,
+	});
+	const verified_visitors = await Visitor.find({
+		residentId: req.user._id,
+		isVerified: true,
+	});
+	const paid_bills = await Bill.find({
+		residentId: req.user._id,
+		isPayed: true,
+	});
+	const unpaid_bills = await Bill.find({
+		residentId: req.user._id,
+		isPayed: false,
+	});
+	res.render("resident/home", {
+		name: name,
+		address: address,
+		verified_bookings: verified_bookings,
+		unverified_bookings: unverified_bookings,
+		resolved_complaints: resolved_complaints,
+		unresolved_complaints: unresolved_complaints,
+		unverified_visitors: unverified_visitors,
+		verified_visitors: verified_visitors,
+		unverified_bookings: unverified_bookings,
+		paid_bills: paid_bills,
+		unpaid_bills: unpaid_bills,
+	});
 };
-
 module.exports.get_bills_paid = async (req, res) => {
 	try {
 		const bills = await Bill.find({ residentId: req.user._id, isPayed: true });

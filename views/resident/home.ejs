@@ -18,402 +18,257 @@
     <div class="row">
 
       <!-- Left side columns -->
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <div class="row">
 
-      
+
           <div class="col-xxl-4 col-md-6">
             <div class="card  info-card sales-card">
 
-             
-              <div class="card-body">
-                <h5 class="card-title">Moeez Ali
 
-                <div class="d-flex align-items-center">
-                 
-                   <h3>424,lahore</h3>
-                </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= name%>
+
+                  <div class="d-flex align-items-center">
+
+                    <h3><%=address  %></h3>
+                  </div>
               </div>
 
             </div>
           </div><!-- End -->
 
-       
+
           <div class="col-xxl-4 col-md-6">
             <a href="/resident/bookings/verified">
-            <div class="card hcard info-card revenue-card">
+              <div class="card hcard info-card revenue-card">
 
-            
 
-              <div class="card-body">
-                <h5 class="card-title">Verified Bookings
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people-fill"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>64</h6>
-            
-                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">Verified Bookings
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people-fill"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=verified_bookings.length  %></h6>
+
+                      </div>
+                    </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
             </a>
           </div><!-- End  -->
 
-         
+
           <div class="col-xxl-4 col-xl-12">
             <a href="/resident/bookings/unverified">
-            <div class="card hcard info-card customers-card">
-
-           
-              <div class="card-body">
-                <h5 class="card-title">Unverified Bookings
+              <div class="card hcard info-card customers-card">
 
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>84</h6>
-                  
+                <div class="card-body">
+                  <h5 class="card-title">Unverified Bookings
 
-                  </div>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=unverified_bookings.length  %></h6>
+
+
+                      </div>
+                    </div>
+
                 </div>
-
               </div>
-            </div>
-</a>
+            </a>
           </div><!-- End  -->
 
-       
-         
-            <div class="col-xxl-4 col-md-6">
-              <a href="/resident/complaints/solved">
+
+
+          <div class="col-xxl-4 col-md-6">
+            <a href="/resident/complaints/solved">
               <div class="card hcard info-card sales-card">
-  
-               
+
+
                 <div class="card-body">
                   <h5 class="card-title">Resolved Complaints
-  
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-archive-fill"></i>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-archive-fill"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=resolved_complaints.length%></h6>
+
+
+                      </div>
                     </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                     
-  
-                    </div>
-                  </div>
                 </div>
-  
+
               </div>
-              </a>
-            </div><!-- End  -->
-  
-        
-            <div class="col-xxl-4 col-md-6">
-              <a href="/resident/complaints/unsolved">
+            </a>
+          </div><!-- End  -->
+
+
+          <div class="col-xxl-4 col-md-6">
+            <a href="/resident/complaints/unsolved">
               <div class="card hcard info-card revenue-card">
-  
-              
+
+
                 <div class="card-body">
                   <h5 class="card-title">Unresolved Complaints
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-archive"></i>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-archive"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=unresolved_complaints.length   %></h6>
+
+
+                      </div>
                     </div>
-                    <div class="ps-3">
-                      <h6>44</h6>
-                    
-  
-                    </div>
-                  </div>
                 </div>
-  
+
               </div>
-              </a>
-            </div><!-- End  -->
-  
-           
-            <div class="col-xxl-4 col-xl-12">
-              <a href="/resident/visitors/unverified">
+            </a>
+          </div><!-- End  -->
+
+
+          <div class="col-xxl-4 col-xl-12">
+            <a href="/resident/visitors/unverified">
               <div class="card hcard info-card customers-card">
-  
-               
+
+
                 <div class="card-body">
                   <h5 class="card-title">Unverified Visitors
-  
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=unverified_visitors.length  %></h6>
+
+
+                      </div>
                     </div>
-                    <div class="ps-3">
-                      <h6>2</h6>
-                    
-  
-                    </div>
-                  </div>
-  
+
                 </div>
               </div>
-  </a>
-            </div>
-      
+            </a>
+          </div>
+
           <div class="col-xxl-4 col-md-6">
             <a href="/resident/bills/paid">
-            <div class="card hcard info-card sales-card">
+              <div class="card hcard info-card sales-card">
 
-          
 
-              <div class="card-body">
-                <h5 class="card-title">Paid Bills
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-clipboard-check"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>145</h6>
-                  
+                <div class="card-body">
+                  <h5 class="card-title">Paid Bills
 
-                  </div>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-clipboard-check"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=paid_bills.length%></h6>
+
+
+                      </div>
+                    </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
             </a>
           </div><!-- End -->
 
-      
+
           <div class="col-xxl-4 col-md-6">
             <a href="/resident/bills/unpaid">
-            <div class="card hcard info-card revenue-card">
+              <div class="card hcard info-card revenue-card">
 
 
-              <div class="card-body">
-                <h5 class="card-title">Unpaid Bills
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-clipboard-x"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>14</h6>
-                   
-                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">Unpaid Bills
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-clipboard-x"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=unpaid_bills.length%></h6>
+
+                      </div>
+                    </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
             </a>
           </div><!-- End  -->
 
-        
+
           <div class="col-xxl-4 col-xl-12">
             <a href="/resident/visitors/verified">
-            <div class="card hcard info-card customers-card">
+              <div class="card hcard info-card customers-card">
 
-             
 
-              <div class="card-body">
-                <h5 class="card-title">Verified Visitors
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>10</h6>
-                    
+                <div class="card-body">
+                  <h5 class="card-title">Verified Visitors
 
-                  </div>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6><%=verified_visitors.length%></h6>
+
+
+                      </div>
+                    </div>
+
                 </div>
-
               </div>
-            </div>
-</a>
+            </a>
           </div>
-          
-   
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Bill Insights</h5>
-  
-                <!-- Donut Chart -->
-                <div id="donutChart"></div>
-  
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new ApexCharts(document.querySelector("#donutChart"), {
-                      series: [44, 22],
-                      chart: {
-                        height: 350,
-                        type: 'donut',
-                        toolbar: {
-                          show: true
-                        }
-                      },
-                      labels: ['Verified', 'Unverified'],
-                    }).render();
-                  });
-                </script>
-                <!-- End Donut Chart -->
-  
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Complaint Insights</h5>
-  
-                <!-- Donut Chart -->
-                <div id="donuutChart"></div>
-  
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new ApexCharts(document.querySelector("#donuutChart"), {
-                      series: [44, 55],
-                      chart: {
-                        height: 350,
-                        type: 'donut',
-                        toolbar: {
-                          show: true
-                        }
-                      },
-                      labels: ['Verified', 'Unverified'],
-                    }).render();
-                  });
-                </script>
-                <!-- End Donut Chart -->
-  
-              </div>
-            </div>
-          </div>
+
+
+
         </div>
- 
-
-      </div><!-- End Left side columns -->
-     
-      <!-- Right side columns -->
-      <div class="col-lg-4">
-
-        <div class="card">
-        
-
-          <div class="card-body pb-0">
-            <h5 class="card-title">Resident Insights
-            <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-            <script>
-              document.addEventListener("DOMContentLoaded", () => {
-                echarts.init(document.querySelector("#trafficChart")).setOption({
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  legend: {
-                    top: '5%',
-                    left: 'center'
-                  },
-                  series: [{
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: ['40%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                      show: false,
-                      position: 'center'
-                    },
-                    emphasis: {
-                      label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold'
-                      }
-                    },
-                    labelLine: {
-                      show: false
-                    },
-                    data: [{
-                        value: 1048,
-                        name: 'Verified'
-                      },
-                      {
-                        value: 435,
-                        name: 'Unverified'
-                      }
-                    ]
-                  }]
-                });
-              });
-            </script>
-
-          </div>
-        </div><!-- End -->
-
-     
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Booking Insights</h5>
-
-              <!-- Donut Chart -->
-              <div id="donuuutChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#donuuutChart"), {
-                    series: [44, 55],
-                    chart: {
-                      height: 350,
-                      type: 'donut',
-                      toolbar: {
-                        show: true
-                      }
-                    },
-                    labels: ['Verified', 'Unverified'],
-                  }).render();
-                });
-              </script>
-              <!-- End Donut Chart -->
-
-            </div>
-          </div>
-        </div>
-        </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- End Right side columns -->
-
-    </div>
   </section>
 
 </main><!-- End #main -->
-<style>/* Light mode styles */
+<style>
+  /* Light mode styles */
   .hcard {
     background-color: #fff;
-    color: #3498db; /* Blue font color */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+    color: #3498db;
+    /* Blue font color */
+    transition: background-color 0.3s, color 0.3s;
+    /* Smooth transition effect */
   }
-  
+
   /* Dark mode styles */
   body.dark-mode .card {
-    background-color: #2c3e50; /* Dark background color */
-    color: #ffd700; /* Yellow font color */
+    background-color: #2c3e50;
+    /* Dark background color */
+    color: #ffd700;
+    /* Yellow font color */
   }
-  
+
   /* Hover effect */
   .hcard:hover {
-    background-color: #8ed5e7; /* Lighter background color on hover */
-    color: #2980b9; /* Darker font color on hover */
+    background-color: #8ed5e7;
+    /* Lighter background color on hover */
+    color: #2980b9;
+    /* Darker font color on hover */
   }
-  </style>
+</style>
 
 <%-include("../partials/footer.ejs") %>
