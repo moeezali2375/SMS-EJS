@@ -18,7 +18,13 @@ body {
   background: #f6f9ff;
   color:white;
 }
-
+.acalert{
+  
+  position: absolute;
+  top: -68px;
+  left: 272px;
+  right: 0px;
+}
 a {
   color: #4154f1;
   text-decoration: none;
